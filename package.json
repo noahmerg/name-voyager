@@ -1,12 +1,14 @@
 {
   "devDependencies": {
+    "esbuild": "^0.19.8",
     "eslint": "^8.54.0",
     "eslint-plugin-sonarjs": "^0.23.0",
     "less": "^4.2.0",
     "semistandard": "^17.0.0",
-    "snazzy": "^9.0.0"
+    "snazzy": "^9.0.0",
+    "terser": "^5.24.0"
   },
-  "scripts" : {
-    "test": "semistandard | snazzy"
+  "scripts": {
+    "lint": "semistandard | snazzy"
   }
 }
