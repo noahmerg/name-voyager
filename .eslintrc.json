@@ -10,7 +10,7 @@
         "sourceType": "module"
     },
     "rules": {
-        "indent": ["error", 4],
+        "indent": ["error", 2],
         "curly": ["error", "all"],
         "brace-style": ["error", "1tbs", { "allowSingleLine": false }]
     },
