@@ -10,6 +10,9 @@
     "terser": "^5.24.0"
   },
   "scripts": {
-    "lint": "semistandard | snazzy"
+    "clean": "npm run clean:dist && rm -rf node_modules",
+    "clean:dist": "rm -rf dist",
+    "lint": "semistandard --verbose src/js/**/*.mjs | snazzy",
+    "format": "semistandard --verbose --fix src/js/**/*.mjs | snazzy"
   }
 }
