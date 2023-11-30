@@ -14,5 +14,6 @@
         "curly": ["error", "all"],
         "brace-style": ["error", "1tbs", { "allowSingleLine": false }]
     },
-    "plugins": ["sonarjs"]
+    "plugins": ["sonarjs"],
+    "ignorePatterns" : ["bundle.js"]
 }
