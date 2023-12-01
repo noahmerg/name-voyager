@@ -1,0 +1,43 @@
+// main: "../main.less"
+// less file for everything at the top of the page including glow and logo + text
+
+.top-glow {
+    position: absolute;
+    top: -50%;
+    right: 50%;
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    box-shadow: 
+      0px 0px 69px 15px rgba(145, 211, 255, 0.23), 
+      0px 0px 300px 300px #91d3ff, 
+      0px 0px 500px 500px rgba(145, 211, 255, 0.219);
+    z-index: 10;
+  }
+  
+  .logo-area {
+    grid-area: header;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .logo-text{
+    font-family: 'Researcher';
+    font-size: 2.5rem;
+  }
+  
+  @font-face {
+    font-family: 'Researcher';
+    src: url('/webapp/src/assets/researcher-researcher-regular-400.ttf'); /*URL to font*/
+  }
+  
+  .logo {
+    margin-top: 1rem;
+    width: 10%;
+    height: auto;
+  }

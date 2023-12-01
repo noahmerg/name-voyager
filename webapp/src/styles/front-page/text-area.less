@@ -1,0 +1,92 @@
+// main: "../main.less"
+// less file for text on welcom page inlcuding the *cool* animations
+
+.text-area {
+    overflow: hidden;
+    position:relative;
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-area: middleOne;
+  }
+  
+  .welcome-text {
+    display: inline-block;
+    color: #colors[text];
+    text-align: center;
+    line-height: 2;
+    font-size: large;
+  }
+  
+  .bar{
+    position: absolute;
+    background-color: #colors[text];
+  }
+  
+  .left-bar{
+    left:0;
+    top: 0;
+    width: 2px;
+    height: 0px;
+    animation: alternate ease-in-out left-bar 5s infinite;
+  }
+  
+  .right-bar{
+    right:0;
+    bottom: 0;
+    width: 2px;
+    height: 0px;
+    animation: alternate ease-in-out right-bar 5s infinite;
+  }
+  
+  @keyframes left-bar{
+    0%{
+     height: 0px;
+     top: 0%; 
+    }
+    50%{
+      height: 20px;
+      top: 50%;
+    }
+    100%{
+      height: 0px;
+      top: 100%; 
+    }
+  }
+  @keyframes right-bar{
+    0%{
+     height: 0px;
+     bottom: 0%; 
+    }
+    50%{
+      height: 20px;
+      bottom: 50%;
+    }
+    100%{
+      height: 0px;
+      bottom: 100%; 
+    }
+  }
+  
+  .dot-animation {
+    text-align: center;
+    color: rgba(240, 248, 255, 0.26);
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 10s steps(6) infinite;
+    animation-delay: 1s;
+    font-size: 1.6rem;
+    width: 3ch;
+  }
+  
+  @keyframes typing {
+    from{
+      width: 0
+    }
+    to{
+      width: 3ch
+    }
+  }
