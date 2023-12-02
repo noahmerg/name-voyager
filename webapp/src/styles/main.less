@@ -9,6 +9,9 @@
 @import "front-page/text-area";
 @import "front-page/button-area";
 @import "bookmark";
+@import "filter/filter.less";
+@import "filter/sex-slider.less";
+@import "filter/syllables.less";
 
 * {
   font-family: Arial, Helvetica, sans-serif;
@@ -26,7 +29,8 @@
 }
 
 body{
-  font-size: 16px
+  font-size: 16px;
+  background-color: #colors[background];
 }
 
 html{
@@ -40,5 +44,8 @@ html{
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: 'header header header' 'leftOne middleOne rightOne' 'footerl footerm footerr';
   align-items: center;
-  background-color: #colors[background];
+}
+
+#nextsite{
+  height: 100vh;
 }
