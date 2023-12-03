@@ -1,0 +1,25 @@
+// main: "../main.less"
+
+@filter-width: 400px;
+
+@media screen and (max-width: 1000px) {
+    .filter-and-results{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 1001px) {
+    .filter-and-results{
+        grid-template-columns:  @filter-width;
+        grid-template-rows: 1fr;
+    }
+    
+}
+
+.filter-and-results{
+    display: grid;
+    grid-column-gap: 40px;
+    grid-row-gap: 40px;
+    margin: 40px; //may needs to be changed later
+}

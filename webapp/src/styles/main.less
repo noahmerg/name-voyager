@@ -5,13 +5,18 @@
 // aus main.less wird main.css erstellt
 // html referenziert lediglich main.css
 @import "cd";
-@import "front-page/logo-area";
-@import "front-page/text-area";
-@import "front-page/button-area";
+
 @import "bookmark";
-@import "filter/filter.less";
-@import "filter/sex-slider.less";
-@import "filter/syllables.less";
+
+@import "front-page/logo-area.less";
+@import "front-page/text-area.less";
+@import "front-page/button-area.less";
+
+@import "nextsite/nextsite.less";
+  @import "nextsite/filter/filter.less";
+    @import "nextsite/filter/sex-slider.less";
+    @import "nextsite/filter/syllables.less";
+  @import "nextsite/results/results.less";
 
 * {
   font-family: Arial, Helvetica, sans-serif;
