@@ -1,26 +1,65 @@
 // main: "../main.less"
 
-@filter-width: 400px;
+@filter-width: 300px;
+
+#nextsite {
+  height: 100vh;
+  margin-top: 100px;
+  justify-content: center;
+  display: flex;
+}
+
+.filter-and-results {
+  display: grid;
+  max-width: 1400px;
+  column-gap: 40px;
+  row-gap: 40px;
+  margin: 40px; //may needs to be changed later
+  margin-bottom: 0px;
+  align-content: start;
+  align-items: stretch;
+}
+
+.grid-bar {
+  background-color: grey;
+  box-shadow: 0px 0px 3px 1px grey;
+}
 
 @media screen and (max-width: 1000px) {
-    .filter-and-results{
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(2, 1fr);
-    }
+  .filter-and-results {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-container {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .results-container {
+    grid-area: 3 / 1 / 4 / 2;
+  }
+
+  .grid-bar {
+    grid-area: 2 / 1 / 3 / 2;
+    height: 1px;
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 1001px) {
-    .filter-and-results{
-        grid-template-columns:  @filter-width;
-        grid-template-rows: 1fr;
-    }
-    
-}
+  .filter-and-results {
+    grid-template-columns: @filter-width;
+  }
 
-.filter-and-results{
-    display: grid;
-    grid-column-gap: 40px;
-    grid-row-gap: 40px;
-    margin: 40px; //may needs to be changed later
-    padding-top: 40px;
+  .filter-container {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .results-container {
+    grid-area: 1 / 3 / 2 / 4;
+  }
+
+  .grid-bar {
+    grid-area: 1 / 2 / 1 / 3;
+    width: 1px;
+  }
 }
