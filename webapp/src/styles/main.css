@@ -50,7 +50,8 @@
 }
 .logo {
   margin-top: 1rem;
-  width: 20rem;
+  width: 100%;
+  max-width: 20rem;
   height: auto;
 }
 .text-area {
@@ -59,21 +60,26 @@
   flex-direction: column;
   grid-area: middleOne;
   justify-content: center;
-  overflow: hidden;
   padding-left: 1rem;
   padding-right: 1rem;
   position: relative;
 }
+@media all and (orientation: portrait) {
+  .text-area {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
 .welcome-text {
-  color: #f5f5f5;
-  display: inline-block;
+  color: #9a9a9a;
+  display: block;
   font-size: 1.5rem;
   line-height: 2;
   text-align: center;
   user-select: none;
 }
 .bar {
-  background-color: #f5f5f5;
+  background-color: #9a9a9a;
   position: absolute;
 }
 .left-bar {
@@ -388,6 +394,11 @@ html {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: 'header header header' 'leftOne middleOne rightOne' 'footerl footerm footerr';
   align-items: center;
+}
+@media all and (orientation: portrait) {
+  .frontpage {
+    grid-template-areas: 'header header header' 'middleOne middleOne middleOne' 'footerl footerm footerr';
+  }
 }
 #nextsite {
   height: 100vh;

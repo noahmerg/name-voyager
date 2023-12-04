@@ -50,6 +50,11 @@ html{
   grid-template-areas: 'header header header' 'leftOne middleOne rightOne' 'footerl footerm footerr';
   align-items: center;
 }
+@media all and (orientation:portrait){
+  .frontpage{
+    grid-template-areas: 'header header header' 'middleOne middleOne middleOne' 'footerl footerm footerr';
+  }
+}
 
 #nextsite{
   height: 100vh;

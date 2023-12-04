@@ -7,15 +7,19 @@
   flex-direction: column;
   grid-area: middleOne;
   justify-content: center;
-  overflow: hidden;
   padding-left: 1rem;
   padding-right: 1rem;
   position: relative;
 }
-
+@media all and (orientation:portrait){
+  .text-area{
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
 .welcome-text {
-  color: #colors[text];
-  display: inline-block;
+  color: #colors[text-secondary];
+  display: block;
   font-size: 1.5rem;
   line-height: 2;
   text-align: center;
@@ -23,7 +27,7 @@
 }
 
 .bar {
-  background-color: #colors[text];
+  background-color: #colors[text-secondary];
   position: absolute;
 }
 
