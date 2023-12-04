@@ -1,75 +1,68 @@
 // main: "../../main.less"
 
-@media screen and (max-width: 1000px) {
-    .filter-container{
-        grid-area: 1 / 1 / 2 / 2;
-    }
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 4px;
 }
 
-@media screen and (min-width: 1001px) {
-    .filter-container{
-        grid-area: 1 / 1 / 2 / 2; 
-    }
+.filter-element {
+  width: 100%;
 }
 
-.dropdown-test{
-    cursor: pointer;
+.accordion {
+  background-color: transparent;
+  color: #colors[text];
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  font-size: 1.5rem;
+  transition: 0.4s;
+  border-radius: 15px;
+  border: solid 2px fade(@accent-color, 20%);
 }
 
-@accent-color: #colors[accent];
-
-.accordion{
-    background-color: transparent;
-    color: #colors[text];
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    font-size: 1.5rem;
-    transition: 0.4s;
-    border-radius: 15px;
-    border: solid 2px fade(@accent-color, 20%);
-    margin: 4px;
+.accordion:after {
+  content: "+";
+  font-size: 1.5rem;
+  color: #colors[text];
+  float: right;
+  margin-left: 5px;
 }
 
-.accordion:after{
-        content: '+';
-        font-size: 1.5rem;
-        color: #colors[text];
-        float: right;
-        margin-left: 5px;
+.active:after {
+  content: "-";
 }
 
-.active:after{
-    content: '-'
+.active,
+.accordion:hover {
+  border: solid 2px #colors[primary];
 }
 
-.active, .accordion:hover{
-    border: solid 2px #colors[primary];
+.panel {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }
 
-.panel{
-    padding: 0 18px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-}
-
-.apply{
-    color: #colors[text];
-    cursor: pointer;
-    padding: 18px;
-    margin: 4px;
-    width: 100%;
-    text-align: center;
-    font-size: 1.5rem;
-    border-radius: 15px;
-    border: solid 1px rgba(145, 211, 255, 0.349);
-    transition: all 0.5s;
-    background-color: #colors[primary];
+.apply {
+  color: #colors[text];
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 15px;
+  border: solid 1px rgba(145, 211, 255, 0.349);
+  transition: all 0.5s;
+  background-color: #colors[primary];
 }
 
 .apply:hover {
-    background-color: lighten(@backgroundcolor, 15%);
-    background-image: none; //what is this
-  }
+  background-color: lighten(@background-color, 15%);
+  background-image: none; //what is this
+}
