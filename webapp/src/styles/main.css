@@ -90,45 +90,111 @@
   position: absolute;
 }
 .left-bar {
-  animation: alternate ease-in-out left-bar 5s infinite;
+  animation: normal ease-in-out left-bar 20s infinite;
   height: 0px;
   left: 0%;
   top: 0%;
   width: 2px;
 }
 .right-bar {
-  animation: alternate ease-in-out right-bar 5s infinite;
+  animation: normal ease-in-out right-bar 20s infinite;
   bottom: 0%;
   height: 0px;
   right: 0%;
   width: 2px;
 }
-@keyframes left-bar {
+.top-bar {
+  animation: normal ease-in-out top-bar 20s infinite;
+  height: 2px;
+  left: 0%;
+  top: 0%;
+  width: 0px;
+}
+.bottom-bar {
+  animation: normal ease-in-out bottom-bar 20s infinite;
+  bottom: 0%;
+  height: 2px;
+  right: 0%;
+  width: 0px;
+}
+@keyframes top-bar {
+  0% {
+    width: 0px;
+    left: 0%;
+  }
+  12.5% {
+    width: 20px;
+    left: 50%;
+  }
+  25% {
+    width: 0px;
+    left: 100%;
+  }
+  100% {
+    width: 0px;
+    left: 100%;
+  }
+}
+@keyframes right-bar {
   0% {
     height: 0px;
     top: 0%;
   }
-  50% {
+  25% {
+    height: 0px;
+    top: 0%;
+  }
+  37.5% {
     height: 20px;
     top: 50%;
+  }
+  50% {
+    height: 0px;
+    top: 100%;
   }
   100% {
     height: 0px;
     top: 100%;
   }
 }
-@keyframes right-bar {
+@keyframes bottom-bar {
   0% {
-    bottom: 0%;
-    height: 0px;
+    width: 0px;
+    right: 0%;
   }
   50% {
-    bottom: 50%;
-    height: 20px;
+    width: 0px;
+    right: 0%;
+  }
+  62.5% {
+    width: 20px;
+    right: 50%;
+  }
+  75% {
+    width: 0px;
+    right: 100%;
   }
   100% {
-    bottom: 100%;
+    width: 0px;
+    right: 100%;
+  }
+}
+@keyframes left-bar {
+  0% {
     height: 0px;
+    top: 100%;
+  }
+  75% {
+    height: 0px;
+    top: 100%;
+  }
+  87.5% {
+    height: 20px;
+    top: 50%;
+  }
+  100% {
+    height: 0px;
+    top: 0%;
   }
 }
 .dot-animation {

@@ -12,8 +12,8 @@
   padding-right: 1rem;
   position: relative;
 }
-@media all and (orientation:portrait){
-  .text-area{
+@media all and (orientation: portrait) {
+  .text-area {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
   }
@@ -33,51 +33,124 @@
   position: absolute;
 }
 
+@round-trip-duration: 20s;
+@initial-length: 0px;
+@maximum-length: 20px;
+@thickness: 2px;
+
 .left-bar {
-  animation: alternate ease-in-out left-bar 5s infinite;
-  height: 0px;
+  animation: normal ease-in-out left-bar @round-trip-duration infinite;
+  height: @initial-length;
   left: 0%;
   top: 0%;
-  width: 2px;
+  width: @thickness;
 }
 
 .right-bar {
-  animation: alternate ease-in-out right-bar 5s infinite;
+  animation: normal ease-in-out right-bar @round-trip-duration infinite;
   bottom: 0%;
-  height: 0px;
+  height: @initial-length;
   right: 0%;
-  width: 2px;
+  width: @thickness;
 }
 
-@keyframes left-bar {
+.top-bar {
+  animation: normal ease-in-out top-bar @round-trip-duration infinite;
+  height: @thickness;
+  left: 0%;
+  top: 0%;
+  width: @initial-length;
+}
+
+.bottom-bar {
+  animation: normal ease-in-out bottom-bar @round-trip-duration infinite;
+  bottom: 0%;
+  height: @thickness;
+  right: 0%;
+  width: @initial-length;
+}
+
+@keyframes top-bar {
   0% {
-    height: 0px;
-    top: 0%;
+    width: @initial-length;
+    left: 0%;
   }
-  50% {
-    height: 20px;
-    top: 50%;
+  12.5% {
+    width: @maximum-length;
+    left: 50%;
+  }
+  25% {
+    width: @initial-length;
+    left: 100%;
   }
   100% {
-    height: 0px;
-    top: 100%;
+    width: @initial-length;
+    left: 100%;
   }
 }
 @keyframes right-bar {
   0% {
-    bottom: 0%;
-    height: 0px;
+    height: @initial-length;
+    top: 0%;
+  }
+  25% {
+    height: @initial-length;
+    top: 0%;
+  }
+  37.5% {
+    height: @maximum-length;
+    top: 50%;
   }
   50% {
-    bottom: 50%;
-    height: 20px;
+    height: @initial-length;
+    top: 100%;
   }
   100% {
-    bottom: 100%;
-    height: 0px;
+    height: @initial-length;
+    top: 100%;
+  }
+}
+@keyframes bottom-bar {
+  0% {
+    width: @initial-length;
+    right: 0%;
+  }
+  50% {
+    width: @initial-length;
+    right: 0%;
+  }
+  62.5% {
+    width: @maximum-length;
+    right: 50%;
+  }
+  75% {
+    width: @initial-length;
+    right: 100%;
+  }
+  100% {
+    width: @initial-length;
+    right: 100%;
   }
 }
 
+@keyframes left-bar {
+  0% {
+    height: @initial-length;
+    top: 100%;
+  }
+  75% {
+    height: @initial-length;
+    top: 100%;
+  }
+  87.5% {
+    height: @maximum-length;
+    top: 50%;
+  }
+  100% {
+    height: @initial-length;
+    top: 0%;
+  }
+}
 .dot-animation {
   animation: typing 10s steps(6) infinite;
   animation-delay: 1s;
