@@ -42,6 +42,7 @@
   font-family: 'Researcher';
   font-size: 2.5rem;
   user-select: none;
+  text-align: center;
 }
 @font-face {
   font-family: 'Researcher';
@@ -50,9 +51,13 @@
 }
 .logo {
   margin-top: 1rem;
-  width: 100%;
-  max-width: 20rem;
+  width: 20rem;
   height: auto;
+}
+@media all and (orientation: portrait) {
+  .logo {
+    width: 10rem;
+  }
 }
 .text-area {
   align-items: center;
@@ -60,6 +65,7 @@
   flex-direction: column;
   grid-area: middleOne;
   justify-content: center;
+  margin-top: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   position: relative;
@@ -75,7 +81,8 @@
   display: block;
   font-size: 1.5rem;
   line-height: 2;
-  text-align: center;
+  text-align: justify;
+  text-align-last: center;
   user-select: none;
 }
 .bar {
@@ -388,7 +395,7 @@ html {
   scroll-behavior: smooth;
 }
 .frontpage {
-  height: 100vh;
+  height: 100svh;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
@@ -401,6 +408,6 @@ html {
   }
 }
 #nextsite {
-  height: 100vh;
+  min-height: 100svh;
   margin-top: 100px;
 }
