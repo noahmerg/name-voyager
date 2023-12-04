@@ -3,17 +3,54 @@
 @media screen and (max-width: 1000px) {
     .filter-container{
         grid-area: 1 / 1 / 2 / 2;
-        background-color: blue;
     }
 }
 
 @media screen and (min-width: 1001px) {
     .filter-container{
         grid-area: 1 / 1 / 2 / 2; 
-        background-color: green;
     }
 }
 
 .dropdown-test{
     cursor: pointer;
+}
+
+@accent-color: #colors[accent];
+
+.accordion{
+    background-color: transparent;
+    color: #colors[text];
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    font-size: 1.5rem;
+    transition: 0.4s;
+    border-radius: 15px;
+    border: solid 2px fade(@accent-color, 20%);
+    margin: 4px;
+}
+
+.accordion:after{
+        content: '+';
+        font-size: 1.5rem;
+        color: #colors[text];
+        float: right;
+        margin-left: 5px;
+}
+
+.active:after{
+    content: '-'
+}
+
+.active, .accordion:hover{
+    border: solid 2px #colors[primary];
+}
+
+.panel{
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
 }

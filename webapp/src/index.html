@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles/main.css"/>
     <link rel="icon" type="svg" href="./assets/name-voyager-logo-white.svg"/>
     <script defer src="bundle.js"></script>
+    <script defer src="/webapp/src/js/nextsite/filter-dropdown.mjs"></script>
 </head>
 <body>
     <div class="save-button"><button>&#9825</button></div>
@@ -35,23 +36,30 @@
     <article id="nextsite">
         <section class="filter-and-results">
             <div class="filter-container">
-                <label class="toggle">
-                    <input type="checkbox">
-                    <span class="slider"></span>
-                    <span class="labels" woman="W" man="M"></span>
-                </label>
-                <label class="syllables-label" for="syllables">
-                    Syllables: 
-                    <input type="number" class="syllables" name="syllables" min="1" max="10" placeholder="2">
-                </label>
-                <details class="dropdown-test">
-                    <summary class="closed">Click here to open</summary>
-                    <span>
-                        <button>
-                            Hallo
-                        </button>
-                    </span>
-                </details>             
+                <button class="accordion">Gender <input type="checkbox"></button>
+                <div class="panel">
+                    <label class="toggle">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                        <span class="labels" woman="W" man="M"></span>
+                    </label>
+                </div>
+
+                <button class="accordion">Prefix</button>
+                <div class="panel">
+
+                </div>
+                <button class="accordion">Suffix</button>
+                <div class="panel">
+                    
+                </div>
+                <button class="accordion">Syllables</button>
+                <div class="panel">
+                    <label class="syllables-label" for="syllables">
+                        Syllables: 
+                        <input type="number" class="syllables" name="syllables" min="1" max="10" placeholder="2">
+                    </label>
+                </div>
             </div>
             <div class="results-container">
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit facere adipisci, tempora sapiente quam perferendis dignissimos repudiandae veniam iste cupiditate harum laboriosam, voluptas nemo error ratione nisi, eveniet debitis distinctio?</p>
