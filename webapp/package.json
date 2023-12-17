@@ -1,0 +1,29 @@
+{
+  "devDependencies": {
+    "esbuild": "^0.19.8",
+    "eslint": "^8.54.0",
+    "eslint-plugin-sonarjs": "^0.23.0",
+    "http-server": "^14.1.1",
+    "less": "^4.2.0",
+    "less-plugin-clean-css": "^1.5.1",
+    "semistandard": "^17.0.0",
+    "snazzy": "^9.0.0",
+    "terser": "^5.24.0"
+  },
+  "scripts": {
+    "clean": "npm run clean:dist && rm -rf node_modules",
+    "clean:dist": "rm -rf dist",
+    "lint": "semistandard --verbose src/js/**/*.mjs | snazzy",
+    "format": "semistandard --verbose --fix src/js/**/*.mjs | snazzy",
+    "test": "mocha",
+    "debug": "npm run html && npm run css && npm run js",
+    "build": "npm run debug && npm run minify",
+    "html": "mkdir -p dist && cp src/index.html dist/index.html",
+    "css": "mkdir -p dist && lessc src/styles/main.less dist/main.css",
+    "js": "mkdir -p dist && esbuild src/js/Main.mjs --log-level=warning --bundle --outfile=dist/bundle.js",
+    "minify": "npm run minify:css && npm run minify:js",
+    "minify:css": "lessc --clean-css dist/main.css dist/main.css",
+    "minify:js": "terser dist/bundle.js --compress --mangle --comments=false -o dist/bundle.js",
+    "start": "http-server dist"
+  }
+}
