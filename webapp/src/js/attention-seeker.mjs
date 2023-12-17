@@ -1,4 +1,4 @@
-window.onload = function () {
+export function handleVisibilityChaange() {
   const pageTitle = document.title;
   const attentionMessage = 'Looking for you...';
 
@@ -11,4 +11,4 @@ window.onload = function () {
       document.title = pageTitle;
     }
   });
-};
+}
