@@ -1,10 +1,15 @@
 // main: "main.less"
 
 .save-button {
-  left: 85%;
+  left: 90%;
   position: fixed;
-  top: 85%;
+  top: 90%;
   z-index: 20;
+}
+@media all and (orientation:portrait) {
+  .save-button{
+    left:80%;
+  }
 }
 
 .save-button button {
