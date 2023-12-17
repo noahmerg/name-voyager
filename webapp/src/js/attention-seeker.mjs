@@ -1,4 +1,4 @@
-export function handleVisibilityChaange() {
+export function handleVisibilityChange () {
   const pageTitle = document.title;
   const attentionMessage = 'Looking for you...';
 
