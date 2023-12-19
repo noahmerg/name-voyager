@@ -25,6 +25,7 @@
     "minify": "npm run minify:css && npm run minify:js",
     "minify:css": "lessc --clean-css dist/main.css dist/main.css",
     "minify:js": "terser dist/bundle.js --compress --mangle --comments=false -o dist/bundle.js",
+    "initdb":"",
     "start": "http-server dist -c-1"
   }
 }
