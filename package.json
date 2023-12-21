@@ -27,7 +27,7 @@
     "minify:css": "lessc --clean-css webapp/dist/main.css webapp/dist/main.css",
     "minify:js": "terser webapp/dist/bundle.js --compress --mangle --comments=false -o webapp/dist/bundle.js",
     "initdb": "",
-    "start": "http-server webapp/dist -c-1"
+    "start": "node server/index.mjs"
   },
   "dependencies": {
     "express": "^4.18.2"
