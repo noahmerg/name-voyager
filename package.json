@@ -14,7 +14,9 @@
   "scripts": {
     "clean": "npm run clean:dist && rm -rf node_modules",
     "clean:dist": "rm -rf webapp/dist",
-    "lint": "semistandard --verbose webapp/src/js/**/*.mjs | snazzy",
+    "lint": "npm run lint:webapp && npm run lint:server",
+    "lint:webapp": "semistandard --verbose webapp/src/js/**/*.mjs | snazzy",
+    "lint:server": "semistandard --verbose server/**/*.mjs | snazzy",
     "format": "semistandard --verbose --fix webapp/src/js/**/*.mjs | snazzy",
     "test": "mocha",
     "predebug": "npm run clean:dist && npm run lint",
@@ -26,7 +28,7 @@
     "minify": "npm run minify:css && npm run minify:js",
     "minify:css": "lessc --clean-css webapp/dist/main.css webapp/dist/main.css",
     "minify:js": "terser webapp/dist/bundle.js --compress --mangle --comments=false -o webapp/dist/bundle.js",
-    "initdb": "",
+    "initdb": "node server/initdb.mjs",
     "start": "node server/index.mjs"
   },
   "dependencies": {
