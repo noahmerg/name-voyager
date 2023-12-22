@@ -1,6 +1,8 @@
 import { MongoClient } from 'mongodb';
 
-const uri = 'mongodb://127.0.0.1:27017/name-voyager';
+const uri = 'mongodb://172.25.80.1:27017/name-voyager'; // wsl
+// const uri = 'mongodb://127.0.0.1:27017/name-voyager'; // windows
+// const uri = 'mongodb://localhost:27017/name-voyager'; // ubuntu
 const client = new MongoClient(uri);
 
 const databaseName = 'name-voyager';
