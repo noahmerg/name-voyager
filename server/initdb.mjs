@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { readFileSync } from 'fs';
 
-const uri = 'mongodb://127.0.0.1:27017/name-voyager';
+const uri = 'mongodb://172.25.80.1:27017/name-voyager';
 //const uri = 'mongodb://localhost:27017/name-voyager.names';
 const client = new MongoClient(uri);
 
