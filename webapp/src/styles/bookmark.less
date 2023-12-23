@@ -1,24 +1,49 @@
 // main: "main.less"
-
+.save-button-container{
+  display:block;
+}
 .save-button {
-  left: 90%;
+  right: 5%;
   position: fixed;
   top: 90%;
   z-index: 20;
+  background-color: #424550;
+  border: 0px;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  font-size: xx-large;
+  height: 50px;
+  min-width: 50px;
+  user-select: none;
+}
+.save-button-symbol{
+  transition: 1s;
+}
+.save-button-content{
+  display:flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
 }
 @media all and (orientation:portrait) {
   .save-button{
     left:80%;
   }
 }
-
-.save-button button {
-  background-color: #424550;
-  border: 0px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: xx-large;
-  height: 50px;
-  width: 50px;
-  user-select: none;
+.save-button-text{
+  display:inline-flex;
+  overflow:hidden;
+  max-width: 0px;
+  font-size: 12px;
+  transition: 1s; 
+  margin-right: 0px;
+}
+.save-button:hover .save-button-text{
+  max-width: 105px;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+.save-button:hover .save-button-symbol{
+  margin-right: 5px;
+  margin-left: 10px;
 }
