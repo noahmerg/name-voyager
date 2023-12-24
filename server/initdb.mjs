@@ -1,8 +1,7 @@
 import fs from 'fs';
-import path from 'path';
+import path, { dirname } from 'path';
 import { MongoClient } from 'mongodb';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import { connectToDatabase, closeDatabaseConnection } from './db.mjs';
 
 // TO RUN A MONGO INSTANCE: sudo mongod --dbpath ~/data/db
@@ -14,7 +13,7 @@ const collectionName = 'names';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-async function populateDatabase() {
+async function populateDatabase () {
   try {
     await connectToDatabase();
 
@@ -26,8 +25,8 @@ async function populateDatabase() {
     const rows = csvData.trim().split('\n').map(row => row.split(';'));
 
     rows.shift();
-    
-    const data = rows.map(row => ({ vorname: row[0], geschlecht: row[1]}));
+
+    const data = rows.map(row => ({ vorname: row[0], geschlecht: row[1] }));
 
     await dataCollection.insertMany(data);
 
