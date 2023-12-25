@@ -10,7 +10,6 @@ async function testdb () {
   try {
     await connectToDatabase();
 
-    // Access the specified database and collection
     const database = client.db(databaseName);
     const collection = database.collection(collectionName);
 
