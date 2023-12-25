@@ -4,8 +4,10 @@
 
 import { handleVisibilityChange } from './attention-seeker.mjs';
 import { initializeFilterDropdown } from './nextsite/filter-dropdown.mjs';
+import { bookmarkPopup } from './frontpage/bookmark.mjs';
 
 window.onload = function () {
   handleVisibilityChange();
   initializeFilterDropdown();
+  bookmarkPopup();
 };
