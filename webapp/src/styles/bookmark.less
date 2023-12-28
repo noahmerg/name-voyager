@@ -21,10 +21,18 @@
   cursor: pointer;
   font-size: xx-large;
   height: 50px;
+  width: min-content;
   min-width: 50px;
+  max-width: 114px;
   user-select: none;
 }
 .save-button-symbol{
+  display: flex;
+  color:white;
+  justify-content: center;
+  align-items: center;
+  max-width: 50px;
+  max-height: 50px;
   transition: 1s;
 }
 .save-button-content{
@@ -35,12 +43,12 @@
 }
 @media all and (orientation:portrait) {
   #save-button{
-    left:80%;
+    right:@right_pos+5%;
   }
 }
 .save-button-text{
-  display:inline-flex;
   overflow:hidden;
+  min-width: 0px;
   max-width: 0px;
   font-size: 12px;
   opacity: 0%;
@@ -48,7 +56,8 @@
   margin-right: 0px;
 }
 #save-button:hover .save-button-text{
-  max-width: 105px;
+  max-width: 60px;
+  min-width: 60px;
   margin-right: 10px;
   margin-left: 5px;
   opacity: 100%;
@@ -60,14 +69,22 @@
 
 // bookmark list
 #bookmark-list{
+  display: grid; /* Grid Container */
+  grid-template-rows: 10% 90%; /* 20% Höhe für den Header und 80% für den Body */ /* Setzen Sie die gewünschte Höhe für die Bookmark-Liste */
+  grid-template-areas:
+  "Header"
+  "Body";
   .sticky();
-  bottom:10%;
-  background-color: white;
+  bottom:11%;
+  background-color: @backgroundcolor;
   border-radius: 25px;
   min-width: 300px;
-  min-height: 500px;
-  transition: 0.8s;
+  height: 500px;
+  transition: 0.7s;
   transform-origin: bottom right;
+  border:2px solid rgb(41, 41, 41);
+  overflow: hidden;
+  z-index: 20;
 }
 .open{
   transform: scale(1,1);
@@ -77,5 +94,33 @@
   opacity: 0%;
   transform: scale(0,0);
 }
-
-
+.bookmark-header{
+  grid-area: Header;
+  background-color: rgb(58, 58, 58);
+  display:flex;
+  align-items: center;
+  gap: 20px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 2px solid rgb(41, 41, 41);
+}
+.bookmark-body{
+  grid-area: Body;
+  overflow-y: scroll;
+  padding: 10px;
+}
+.bookmark-body::-webkit-scrollbar{
+  width: 5px;
+  background-color: black;
+}
+.bookmark-body::-webkit-scrollbar-thumb{
+  background-color: #aaa;
+}
+.favname{
+  cursor: grabbing;
+  padding: 1rem;
+}
+.dragging{
+  background-color: rgb(40, 40, 40)  ;
+}
