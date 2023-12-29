@@ -4,11 +4,13 @@
 
 import { handleVisibilityChange } from './attention-seeker.mjs';
 import { initializeFilterDropdown } from './nextsite/filter-dropdown.mjs';
-import { bookmarkPopup, bookmarkList } from './frontpage/bookmark.mjs';
+import { bookmarkPopup, bookmarkList, copyToClipboard, removeElement } from './bookmark.mjs';
 
 window.onload = function () {
   handleVisibilityChange();
   initializeFilterDropdown();
   bookmarkPopup();
   bookmarkList();
+  copyToClipboard();
+  removeElement();
 };

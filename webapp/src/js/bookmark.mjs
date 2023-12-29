@@ -50,3 +50,20 @@ export function bookmarkList () {
   bookmarkList.addEventListener('dragover', dragoverHandler);
   bookmarkList.addEventListener('dragend', (event) => { draggedItem.classList.remove('dragging'); });
 }
+export function copyToClipboard () {
+  function copyFunction (event) {
+    const textElement = event.target.parentElement.parentElement.firstElementChild;
+    console.log(textElement);
+    navigator.clipboard.writeText(textElement.innerText);
+  }
+  const copyButtons = [...document.getElementsByClassName('copy-icon')];
+  copyButtons.forEach((element) => element.addEventListener('click', copyFunction));
+}
+export function removeElement () {
+  function removeFunction (event) {
+    const element = event.target.parentElement.parentElement;
+    element.remove();
+  }
+  const deleteButtons = [...document.getElementsByClassName('delete-icon')];
+  deleteButtons.forEach((element) => element.addEventListener('click', removeFunction));
+}

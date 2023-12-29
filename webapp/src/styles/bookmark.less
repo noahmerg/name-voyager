@@ -118,8 +118,25 @@
   background-color: #aaa;
 }
 .favname{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: grabbing;
   padding: 1rem;
+  user-select: none;
+}
+.favname img{
+  user-select: none;
+}
+.icon-container{
+  display: flex;
+  align-items: center;
+  gap:5px;
+  flex-flow: row-reverse;
+}
+.favname::selection{
+  background: @backgroundcolor;
+  border: 1px dashed grey;
 }
 .dragging{
   background-color: rgb(40, 40, 40)  ;
