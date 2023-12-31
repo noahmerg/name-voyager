@@ -1,14 +1,16 @@
 
 // esbuild gonna put this stuff into "bundle.js"
-// & terser gonna make it only the console.log line, since rest is useless
 
 import { handleVisibilityChange } from './attention-seeker.mjs';
-import { initializeFilterDropdown } from './nextsite/filter-dropdown.mjs';
 import { bookmarkPopup, bookmarkList } from './frontpage/bookmark.mjs';
-
+import { initializeSlider } from './nextsite/slider.mjs';
+import { searchListener } from './nextsite/search.mjs';
+import { resetListener } from './nextsite/reset.mjs';
 window.onload = function () {
   handleVisibilityChange();
-  initializeFilterDropdown();
   bookmarkPopup();
   bookmarkList();
+  initializeSlider();
+  searchListener();
+  resetListener();
 };
