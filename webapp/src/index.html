@@ -82,95 +82,112 @@
     <article id="nextsite">
         <section class="filter-and-results">
             <div class="filter-container">
-                <div class="filter-element">
-                    <button class="accordion">Gender</button>
-                    <div class="panel">
-                        <label class="toggle">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                            <span class="labels" woman="W" man="M"></span>
-                        </label>
+                <fieldset class="filter-element">
+                    <legend>Gender</legend>
+                    <div class="radiobuttons">
+                        <input type="radio" name="gender" class="cool-radio" id="gender-w" value="w" checked />
+                            <label class="radio-label" for="gender-w">Women</label>
+                        <input type="radio" name="gender" class="cool-radio" id="gender-m" value="m"/>
+                            <label class="radio-label" for="gender-m">Man</label>
+                        <input type="radio" name="gender" class="cool-radio" id="gender-b" value="b"/>
+                            <label class="radio-label" for="gender-b">Both</label>
                     </div>
-                </div>
-                <div class="filter-element">
-                    <button class="accordion">Prefix</button>
-                    <div class="panel">
-                    </div>    
-                </div>
-                <div class="filter-element">
-                    <button class="accordion">Suffix</button>
-                    <div class="panel">
+                </fieldset>
+                <fieldset class="filter-element">
+                    <legend>Prefix</legend>
+                    <div class="radiobuttons">
+                        <input type="radio" name="prefix" class="cool-radio" id="prefix-include" value="include" checked />
+                            <label class="radio-label" for="prefix-include">Include</label>
+                        <input type="radio" name="prefix" class="cool-radio" id="prefix-exclude" value="exclude"/>
+                            <label class="radio-label" for="prefix-exclude">Exclude</label>
                     </div>
-                </div>
-                <div class="filter-element">
-                    <button class="accordion">Syllables</button>
-                    <div class="panel">
-                        <label class="syllables-label" for="syllables">
-                            Syllables:
-                            <input type="number" class="syllables" name="syllables" min="1" max="10" placeholder="2">
-                        </label>
+                    <input type="text" class="cool-text" id="prefix-text" placeholder="Enter prefix">
+                </fieldset>
+                <fieldset class="filter-element">
+                    <legend>Suffix</legend>
+                    <div class="radiobuttons">
+                        <input type="radio" name="suffix" class="cool-radio" id="suffix-include" value="include" checked />
+                            <label class="radio-label" for="suffix-include">Include</label>
+                        <input type="radio" name="suffix" class="cool-radio" id="suffix-exclude" value="exclude"/>
+                            <label class="radio-label" for="suffix-exclude">Exclude</label>
                     </div>
-                </div>
-                <div class="filter-element">
-                    <button class="apply">Apply</button>
+                    <input type="text" class="cool-text" id="suffix-text" placeholder="Enter suffix" >
+                </fieldset>
+                <fieldset class="filter-element">
+                    <legend id="syllables-legend">Syllables</legend>
+                    <input type="range" min="0" max="9" value="0" class="slider" id="syllables-slider">
+                </fieldset>
+                <div class="button-container-element">
+                    <span id="reset-button">Reset</span>
+                    <span id="search-button">Search</span>
                 </div>
             </div>
             <div class="grid-bar"></div>
             <div class="results-container">
-                <div class="element w">Olivia</div>
-                <div class="element w">Emma</div>
-                <div class="element w">Amelia</div>
-                <div class="element m">Noah</div>
-                <div class="element m">Liam</div>
-                <div class="element w">Mia</div>
-                <div class="element m">Leo</div>
-                <div class="element w">Asher</div>
-                <div class="element m">Ethan</div>
-                <div class="element m">Sebastian</div>
-                <div class="element w">Aria</div>
-                <div class="element w">Aurora</div>
-                <div class="element w">Ellie</div>
-                <div class="element w">Mila</div>
-                <div class="element w">Sofia</div>
-                <div class="element m">Benjamin</div>
-                <div class="element m">Jackson</div>
-                <div class="element w">Ella</div>
-                <div class="element w">Violet</div>
-                <div class="element m">Serenity</div>
-                <div class="element m">Zion</div>
-                <div class="element w">Addison</div>
-                <div class="element m">Jeremiah</div>
-                <div class="element w">Alice</div>
-                <div class="element m">Lincoln</div>
-                <div class="element w">Alice</div>
-                <div class="element w">Bella</div>
-                <div class="element w">Sadie</div>
-                <div class="element m">Adrian</div>
-                <div class="element m">Anthony</div>
-                <div class="element m">Cooper</div>
-                <div class="element w">Amara</div>
-                <div class="element w">Autumn</div>
-                <div class="element m">Micah</div>
-                <div class="element w">Summer</div>
-                <div class="element m">Cameron</div>
-                <div class="element m">Emery</div>
-                <div class="element m">Ryan</div>
-                <div class="element w">Hannah</div>
-                <div class="element m">Rowan</div>
-                <div class="element m">Xavier</div>
-                <div class="element w">Brooklyn</div>
-                <div class="element w">Madelyn</div>
-                <div class="element m">Wesley</div>
-                <div class="element w">Leah</div>
-                <div class="element m">Weston</div>
-                <div class="element w">Maria</div>
-                <div class="element m">Andrew</div>
-                <div class="element m">Joshua</div>
-                <div class="element w">Savannah</div>
-                <div class="element m">Silas</div>
-                <div class="element m">Aubrey</div>
-                <div class="element w">Jade</div>
-                <div class="element w">Sophia</div>
+                <div class="pagination" id="pagination"> 
+                    <a href="#" id="prev">Previous</a> 
+                    <a href="#" class="page-link" data-page="1">1</a> 
+                    <a href="#" class="page-link" data-page="2">2</a> 
+                    <a href="#" class="page-link" data-page="3">3</a> 
+                    <a href="#" id="next">Next</a> 
+                    <p id="page-numbers"> </p> 
+                </div> 
+                <div class="names-container">
+                    <div class="element w">Dimitris-Konstantinos</div>
+                    <div class="element w">Dimitris-Konstantinos</div>
+                    <div class="element w">Amelia</div>
+                    <div class="element m">Dimitris-Konstantinos</div>
+                    <div class="element m">Liam</div>
+                    <div class="element w">Mia</div>
+                    <div class="element m">Leo</div>
+                    <div class="element w">Asher</div>
+                    <div class="element m">Ethan</div>
+                    <div class="element m">Sebastian</div>
+                    <div class="element w">Aria</div>
+                    <div class="element w">Aurora</div>
+                    <div class="element w">Ellie</div>
+                    <div class="element w">Mila</div>
+                    <div class="element w">Sofia</div>
+                    <div class="element m">Benjamin</div>
+                    <div class="element m">Jackson</div>
+                    <div class="element w">Ella</div>
+                    <div class="element w">Violet</div>
+                    <div class="element m">Serenity</div>
+                    <div class="element m">Zion</div>
+                    <div class="element w">Addison</div>
+                    <div class="element m">Jeremiah</div>
+                    <div class="element w">Alice</div>
+                    <div class="element m">Lincoln</div>
+                    <div class="element w">Alice</div>
+                    <div class="element w">Bella</div>
+                    <div class="element w">Sadie</div>
+                    <div class="element m">Adrian</div>
+                    <div class="element m">Anthony</div>
+                    <div class="element m">Cooper</div>
+                    <div class="element w">Amara</div>
+                    <div class="element w">Autumn</div>
+                    <div class="element m">Micah</div>
+                    <div class="element w">Summer</div>
+                    <div class="element m">Cameron</div>
+                    <div class="element m">Emery</div>
+                    <div class="element m">Ryan</div>
+                    <div class="element w">Hannah</div>
+                    <div class="element m">Rowan</div>
+                    <div class="element m">Xavier</div>
+                    <div class="element w">Brooklyn</div>
+                    <div class="element w">Madelyn</div>
+                    <div class="element m">Wesley</div>
+                    <div class="element w">Leah</div>
+                    <div class="element m">Weston</div>
+                    <div class="element w">Maria</div>
+                    <div class="element m">Andrew</div>
+                    <div class="element m">Joshua</div>
+                    <div class="element w">Savannah</div>
+                    <div class="element m">Silas</div>
+                    <div class="element m">Aubrey</div>
+                    <div class="element w">Jade</div>
+                    <div class="element w">Sophia</div>
+                </div>
             </div>
         </section>
     </article>
