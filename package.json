@@ -21,7 +21,7 @@
     "lint:server": "semistandard --verbose server/**/*.mjs | snazzy",
     "format": "npm run format:webapp && npm run format:server",
     "format:webapp": "semistandard --verbose --fix webapp/src/js/**/*.mjs | snazzy",
-    "format:server": "semistandard --verbose --fix server/**/*.mjs | snazzy", 
+    "format:server": "semistandard --verbose --fix server/**/*.mjs | snazzy",
     "test": "mocha",
     "predebug": "npm run clean:dist && npm run lint",
     "debug": "npm run html && npm run css && npm run js && npm run assets",
@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "mongodb": "^6.3.0"
+    "mongodb": "^6.3.0",
+    "syllabificate": "^2.0.3"
   }
 }
