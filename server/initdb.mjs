@@ -3,6 +3,7 @@ import path, { dirname } from 'path';
 import { MongoClient } from 'mongodb';
 import { fileURLToPath } from 'url';
 import { connectToDatabase, closeDatabaseConnection } from './db.mjs';
+import { countSyllables } from 'syllabificate';
 
 // TO RUN A MONGO INSTANCE: sudo mongod --dbpath ~/data/db
 const uri = 'mongodb://localhost:27017';
@@ -26,7 +27,7 @@ async function populateDatabase () {
 
     rows.shift();
 
-    const data = rows.map(row => ({ vorname: row[0], geschlecht: row[1] }));
+    const data = rows.map(row => ({ name: row[0], gender: row[1], syllables: countSyllables(row[0]) }));
 
     await dataCollection.insertMany(data);
 
