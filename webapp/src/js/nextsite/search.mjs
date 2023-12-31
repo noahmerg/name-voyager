@@ -11,13 +11,6 @@ export function searchListener () {
 function printValues () {
   // GENDER
   const gender = document.querySelector('input[name="gender"]:checked').value;
-  /* different possibility:
-  const elems = document.getElementsByName('gender');
-  elems.forEach(elem => {
-    if (elem.checked) {
-      const gender = elem.value;
-    }
-  }); */
   console.log(gender);
 
   // PREFIX
