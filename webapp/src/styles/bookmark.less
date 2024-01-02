@@ -157,15 +157,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: grabbing;
   padding: 1rem;
   user-select: none;
+  cursor: default;
 }
 .favname img{
   user-select: none;
 }
 .favname img:hover{
   filter:drop-shadow(0 0 3px rgb(152, 152, 152));
+}
+.drag-icon{
+  cursor: grab;
 }
 .icon-container{
   display: flex;
@@ -178,7 +181,8 @@
   border: 1px dashed grey;
 }
 .dragging{
-  background-color: rgb(40, 40, 40)  ;
+  background-color: rgb(40, 40, 40);
+  cursor: grabbing;
 }
 
 
