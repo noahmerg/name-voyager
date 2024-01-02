@@ -8,12 +8,12 @@ export function bookmarkPopup () {
       bookmarkList.classList.remove('open');
       bookmarkList.classList.add('notOpen');
       buttonText.innerHTML = 'Bookmarks';
-      // bookmarkList.style.display = 'flex';
+      // beim öffnen der Bookliste hier eine Funktion machen, die eine Anfrage erstellt und dann die
+      // jeweiligen Elemente erstellt
     } else {
       bookmarkList.classList.remove('notOpen');
       bookmarkList.classList.add('open');
       buttonText.innerHTML = 'Close';
-      // bookmarkList.style.display = 'none';
     }
   });
 }
@@ -49,4 +49,21 @@ export function bookmarkList () {
   bookmarkList.addEventListener('dragstart', dragstartHandler);
   bookmarkList.addEventListener('dragover', dragoverHandler);
   bookmarkList.addEventListener('dragend', (event) => { draggedItem.classList.remove('dragging'); });
+}
+export function copyToClipboard () {
+  function copyFunction (event) {
+    const textElement = event.target.parentElement.parentElement.firstElementChild;
+    console.log(textElement);
+    navigator.clipboard.writeText(textElement.innerText);
+  }
+  const copyButtons = [...document.getElementsByClassName('copy-icon')];
+  copyButtons.forEach((element) => element.addEventListener('click', copyFunction));
+}
+export function removeElement () {
+  function removeFunction (event) {
+    const element = event.target.parentElement.parentElement;
+    element.remove();
+  }
+  const deleteButtons = [...document.getElementsByClassName('delete-icon')];
+  deleteButtons.forEach((element) => element.addEventListener('click', removeFunction));
 }
