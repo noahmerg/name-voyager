@@ -96,17 +96,50 @@
 }
 .bookmark-header{
   grid-area: Header;
+  display: grid;
+  grid-template-columns: 12% 38% 50%;
+  grid-template-areas: "Logo Title Toggle";
   background-color: rgb(58, 58, 58);
-  display:flex;
   align-items: center;
-  gap: 10px;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  justify-content: space-evenly;
+  padding:10px;
   border-bottom: 2px solid rgb(41, 41, 41);
 }
+.bookmark-header img{
+  grid-area:Logo;
+  margin-left: 5px;
+}
 .bookmark-header span{
+  grid-area:Title;
   font-weight: bold;
+}
+#bookmark-header-toggle-gender{
+  grid-area: Toggle;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 25px;
+  border: 1px solid black;
+  align-self: center;
+  justify-self: center;
+  overflow: hidden;
+  background-color: #353535;
+}
+#bookmark-header-toggle-gender input{
+  position: fixed;
+  width:0;
+  height:0;
+  opacity: 0;
+}
+#bookmark-header-toggle-gender label{
+  font-size: small;
+  padding:5px;
+  z-index:100;
+  transition: 1s;
+}
+#bookmark-header-toggle-gender input:checked+label{
+  background-color: #242424;
 }
 .bookmark-body{
   grid-area: Body;
@@ -131,6 +164,9 @@
 .favname img{
   user-select: none;
 }
+.favname img:hover{
+  filter:drop-shadow(0 0 3px rgb(152, 152, 152));
+}
 .icon-container{
   display: flex;
   align-items: center;
@@ -144,3 +180,5 @@
 .dragging{
   background-color: rgb(40, 40, 40)  ;
 }
+
+

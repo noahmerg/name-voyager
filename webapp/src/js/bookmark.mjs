@@ -8,12 +8,12 @@ export function bookmarkPopup () {
       bookmarkList.classList.remove('open');
       bookmarkList.classList.add('notOpen');
       buttonText.innerHTML = 'Bookmarks';
-      // bookmarkList.style.display = 'flex';
+      // beim öffnen der Bookliste hier eine Funktion machen, die eine Anfrage erstellt und dann die
+      // jeweiligen Elemente erstellt
     } else {
       bookmarkList.classList.remove('notOpen');
       bookmarkList.classList.add('open');
       buttonText.innerHTML = 'Close';
-      // bookmarkList.style.display = 'none';
     }
   });
 }
