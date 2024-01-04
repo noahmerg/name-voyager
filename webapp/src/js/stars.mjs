@@ -24,7 +24,7 @@ export function starMover () {
         left: `${left}px`,
         top: `${top}px`
       },
-      { duration: 1000, fill: 'both' }
+      { duration: 30000, fill: 'both' }
     );
     // without animation:
     // img.style.left = `${left}px`;
