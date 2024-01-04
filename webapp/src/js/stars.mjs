@@ -11,12 +11,17 @@ export function starMover () {
 
   window.onmousemove = e => {
     const moveStar = (img, factorX, factorY) => {
-      const left = windowWidth * factorX + e.clientX * factorY - imgw / 2;
-      const top = windowHeight * factorX + e.clientY * factorY - imgh / 2;
-      img.style.left = `${left}px`;
-      img.style.top = `${top}px`;
+      const left = windowWidth * factorX - e.clientX * factorY - imgw / 2;
+      const top = windowHeight * factorX - e.clientY * factorY - imgh / 2;
+      img.animate({
+        left: `${left}px`,
+        top: `${top}px`
+      }, { duration: 70000, fill: 'forwards' });
+      // img.style.left = `${left}px`;
+      // img.style.top = `${top}px`;
     };
 
+    // factorX + 2 * factorY = 1
     moveStar(img1, 0.4, 0.2);
     moveStar(img2, 0.35, 0.3);
     moveStar(img3, 0.25, 0.5);
