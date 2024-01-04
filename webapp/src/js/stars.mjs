@@ -1,30 +1,33 @@
 export function starMover () {
-  const img1 = document.getElementById('img1');
-  const img2 = document.getElementById('img2');
-  const img3 = document.getElementById('img3');
-  const img4 = document.getElementById('img4');
+  const images = document.querySelectorAll('.star-images');
 
-  const imgw = img1.width;
-  const imgh = img1.height;
+  const imgw = images[0].width;
+  const imgh = images[0].height;
+
+  // choose one for each image: 0 < value < 1
+  const imgSpeeds = [0.2, 0.3, 0.4, 0.5];
 
   const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
 
   window.onmousemove = e => {
-    const moveStar = (img, factorX, factorY) => {
-      const left = windowWidth * factorX - e.clientX * factorY - imgw / 2;
-      const top = windowHeight * factorX - e.clientY * factorY - imgh / 2;
-      img.animate({
+    for (let i = 0; i < 4; i++) {
+      const imgSpeed = imgSpeeds[i];
+      moveStar(e.clientX, e.clientY, images[i], (1 - imgSpeed) / 2, imgSpeed);
+    }
+  };
+
+  function moveStar (posX, posY, img, factorX, factorY) {
+    const left = windowWidth * factorX - posX * factorY - imgw / 2;
+    const top = windowHeight * factorX - posY * factorY - imgh / 2;
+    img.animate(
+      {
         left: `${left}px`,
         top: `${top}px`
-      }, { duration: 70000, fill: 'forwards' });
-      // img.style.left = `${left}px`;
-      // img.style.top = `${top}px`;
-    };
-
-    // factorX + 2 * factorY = 1
-    moveStar(img1, 0.4, 0.2);
-    moveStar(img2, 0.35, 0.3);
-    moveStar(img3, 0.25, 0.5);
-    moveStar(img4, 0.3, 0.4);
-  };
+      },
+      { duration: 1000, fill: 'both' }
+    );
+    // without animation:
+    // img.style.left = `${left}px`;
+    // img.style.top = `${top}px`;
+  }
 }
