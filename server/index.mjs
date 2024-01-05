@@ -96,7 +96,7 @@ server.get('/bookmarklist', async (request, response) => {
     if (request.query.gender) {
       filter.gender = { $eq: request.query.gender };
     }
-    const cursor = await dbCollection.find(filter);
+    const cursor = await dbCollection.find(filter).sort({ index: 1 });
     const ergebnis = await cursor.toArray();
     response.json(ergebnis);
   } finally {
