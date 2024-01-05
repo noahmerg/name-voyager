@@ -7,6 +7,9 @@ import { searchListener } from './nextsite/search.mjs';
 import { resetListener } from './nextsite/reset.mjs';
 import { bookmarkPopup, bookmarkList, copyToClipboard, removeElement } from './bookmark.mjs';
 
+import { starMover } from './stars.mjs';
+const images = document.querySelectorAll('.star-images');
+
 window.onload = function () {
   handleVisibilityChange();
   bookmarkPopup();
@@ -16,4 +19,11 @@ window.onload = function () {
   resetListener();
   copyToClipboard();
   removeElement();
+  starMover();
+  images.forEach(function (img) {
+    img.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    });
+    img.style.position = 'fixed';
+  });
 };
