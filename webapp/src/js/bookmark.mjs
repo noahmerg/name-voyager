@@ -19,6 +19,7 @@ export function bookmarkPopup () {
 }
 export function bookmarkList () {
   const bookmarkList = document.querySelector('.bookmark-body');
+  // const orderedList = [...bookmarkList.children].map((element, index)=>{return {element:element,index:index}});
   let draggedItem = null;
   function dragstartHandler (event) {
     draggedItem = event.target;

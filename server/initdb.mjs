@@ -9,7 +9,8 @@ import { countSyllables } from 'syllabificate';
 const uri = 'mongodb://localhost:27017';
 const client = new MongoClient(uri);
 const databaseName = 'name-voyager';
-const collectionName = 'names';
+const namesCollectionName = 'names';
+const bookmarkCollectionName = 'bookmarklist';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -17,13 +18,15 @@ const __dirname = dirname(__filename);
 async function populateDatabase () {
   try {
     await connectToDatabase();
-
     const database = client.db(databaseName);
-    const dataCollection = database.collection(collectionName);
+    //creates empty collection for all the saved names (bookmarklist)
+    database.createCollection(bookmarkCollectionName);
+    // creates the main collection that stores all names
+    const dataCollection = database.collection(namesCollectionName);
 
     const csvData = await fs.readFileSync(path.resolve(__dirname, './Namen.csv'), 'utf8');
 
-    const rows = csvData.trim().split('\n').map(row => row.split(';'));
+    const rows = csvData.trim().split(/\r?\n/).map(row => row.split(';'));
 
     rows.shift();
 

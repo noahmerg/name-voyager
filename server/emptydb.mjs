@@ -6,15 +6,18 @@ const uri = 'mongodb://localhost:27017';
 const client = new MongoClient(uri);
 
 const databaseName = 'name-voyager';
-const collectionName = 'names';
+const namesCollectionName = 'names';
+const bookmarkCollectionName = 'bookmarklist';
 
 async function emptyDatabase () {
   try {
     await connectToDatabase();
 
     const database = client.db(databaseName);
-    const dataCollection = database.collection(collectionName);
+    const bookmarkCollection = database.collection(bookmarkCollectionName);
+    const dataCollection = database.collection(namesCollectionName);
 
+    await bookmarkCollection.deleteMany();
     await dataCollection.deleteMany();
     console.log('Deleted all data from database');
   } catch (error) {
