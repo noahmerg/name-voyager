@@ -19,7 +19,7 @@ async function populateDatabase () {
   try {
     await connectToDatabase();
     const database = client.db(databaseName);
-    //creates empty collection for all the saved names (bookmarklist)
+    // creates empty collection for all the saved names (bookmarklist)
     database.createCollection(bookmarkCollectionName);
     // creates the main collection that stores all names
     const dataCollection = database.collection(namesCollectionName);
