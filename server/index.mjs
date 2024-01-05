@@ -39,7 +39,7 @@ server.get('/name/:name', async (request, response) => {
     client.close();
   }
 });
-// gets all names or names that fit the queries e.g. localhost:8080/names?gender=m&&syllables=2&&suffix=ah&&prefix=No
+// gets all names or names that fit the queries e.g. localhost:8080/names?gender=m&&syllables=2&&includsuffix=ah&&includeprefix=No
 server.get('/names', async (request, response) => {
   await client.connect();
   try {
@@ -67,9 +67,9 @@ server.get('/names', async (request, response) => {
 
     // Suffix
     if (request.query.excludesuffix) {
-      regexString += ((request.query.excludeprefix || request.query.includeprefix) ? '.*' : '') + `(?!${request.query.excludesuffix})`;
+      regexString += `(?<!${request.query.excludesuffix})$`;
     } else if (request.query.includesuffix) {
-      regexString += ((request.query.excludeprefix || request.query.includeprefix) ? '.*' : '') + `${request.query.includesuffix}$`;
+      regexString += `${request.query.includesuffix}$`;
     }
 
     if (regexString) {
