@@ -47,20 +47,31 @@ server.get('/names', async (request, response) => {
     const dbCollection = db.collection(namesCollectionName);
 
     const filter = {};
+    // Gender
     if (request.query.gender) {
       filter.gender = { $eq: request.query.gender };
     }
+
+    // Syllables
     if (request.query.syllables) {
       filter.syllables = { $eq: parseInt(request.query.syllables) };
     }
     let regexString = '';
-    if (request.query.prefix) {
-      regexString += '^' + request.query.prefix;
+
+    // Prefix
+    if (request.query.excludeprefix) {
+      regexString += `^(?!${request.query.excludeprefix})`;
+    } else if (request.query.includeprefix) {
+      regexString += `^${request.query.includeprefix}`;
     }
-    if (request.query.suffix) {
-      regexString += request.query.prefix ? '.*' : '';
-      regexString += request.query.suffix;
+
+    // Suffix
+    if (request.query.excludesuffix) {
+      regexString += ((request.query.excludeprefix || request.query.includeprefix) ? '.*' : '') + `(?!${request.query.excludesuffix})`;
+    } else if (request.query.includesuffix) {
+      regexString += ((request.query.excludeprefix || request.query.includeprefix) ? '.*' : '') + `${request.query.includesuffix}$`;
     }
+
     if (regexString) {
       const regex = new RegExp(regexString);
       filter.name = { $regex: regex };
@@ -68,7 +79,7 @@ server.get('/names', async (request, response) => {
     console.log(filter);
     const cursor = await dbCollection.find(filter);
     const ergebnis = await cursor.toArray();
-    console.log(ergebnis);
+    // console.log(ergebnis);
     response.json(ergebnis);
   } finally {
     client.close();
