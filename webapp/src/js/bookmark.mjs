@@ -27,43 +27,51 @@ export function bookmarkList () {
   const button = document.getElementById('save-button');
   async function fillBody () {
     try {
-      clearBody();
       let response = null;
+      console.log(requestGender);
       if (requestGender === 'both') {
-        response = await fetch('/bookmarklist');
+        response = await fetch('http://localhost:8080/bookmarklist');
       } else {
-        response = await fetch(`/bookmarklist?gender=${requestGender}`);
+        response = await fetch(`http://localhost:8080/bookmarklist?gender=${requestGender}`);
       }
       const result = await response.json();
       result.forEach((value) => {
-        const element = document.createElement('div');
-        element.setAttribute('draggable', 'true');
-        element.classList.add('favname');
-        const text = document.createElement('span');
-        text.textContent = value.name;
-        const iconContainer = document.createElement('div');
-        iconContainer.classList.add('icon-container');
-        const dragIconPath = './assets/drag_handle.svg';
-        const copyIconPath = './assets/content_copy.svg';
-        const deleteIconPath = './assets/delete.svg';
-        const dragIcon = document.createElement('img');
-        dragIcon.setAttribute('src', dragIconPath);
-        dragIcon.setAttribute('alt', 'drag-icon');
-        dragIcon.setAttribute('draggable', 'false');
-        const copyIcon = document.createElement('img');
-        copyIcon.setAttribute('src', copyIconPath);
-        copyIcon.setAttribute('alt', 'drag-icon');
-        copyIcon.setAttribute('draggable', 'false');
-        const deleteIcon = document.createElement('img');
-        deleteIcon.setAttribute('src', deleteIconPath);
-        deleteIcon.setAttribute('alt', 'drag-icon');
-        deleteIcon.setAttribute('draggable', 'false');
-        element.appendChild(text);
-        element.appendChild(iconContainer);
-        iconContainer.appendChild(dragIcon);
-        iconContainer.appendChild(copyIcon);
-        iconContainer.appendChild(deleteIcon);
-        bookmarkList.appendChild(element);
+        if (!Array.from(bookmarkList.getElementsByClassName('favname')).some(el => el.textContent.includes(value.name))) {
+          console.log('penis');
+          const element = document.createElement('div');
+          element.setAttribute('draggable', 'true');
+          element.classList.add('favname');
+          const text = document.createElement('span');
+          text.textContent = value.name;
+          const iconContainer = document.createElement('div');
+          iconContainer.classList.add('icon-container');
+          const dragIconPath = './assets/drag_handle.svg';
+          const copyIconPath = './assets/content_copy.svg';
+          const deleteIconPath = './assets/delete.svg';
+          const dragIcon = document.createElement('img');
+          dragIcon.setAttribute('src', dragIconPath);
+          dragIcon.setAttribute('alt', 'drag-icon');
+          dragIcon.setAttribute('draggable', 'false');
+          dragIcon.classList.add('drag-icon');
+          const copyIcon = document.createElement('img');
+          copyIcon.setAttribute('src', copyIconPath);
+          copyIcon.setAttribute('alt', 'drag-icon');
+          copyIcon.setAttribute('draggable', 'false');
+          copyIcon.classList.add('copy-icon');
+          copyIcon.addEventListener('click', copyFunction);
+          const deleteIcon = document.createElement('img');
+          deleteIcon.setAttribute('src', deleteIconPath);
+          deleteIcon.setAttribute('alt', 'drag-icon');
+          deleteIcon.setAttribute('draggable', 'false');
+          deleteIcon.classList.add('delete-icon');
+          deleteIcon.addEventListener('click', removeFunction);
+          element.appendChild(text);
+          element.appendChild(iconContainer);
+          iconContainer.appendChild(dragIcon);
+          iconContainer.appendChild(copyIcon);
+          iconContainer.appendChild(deleteIcon);
+          bookmarkList.appendChild(element);
+        }
       });
     } catch (error) {
       console.log(error);
@@ -103,35 +111,58 @@ export function bookmarkList () {
     radio.addEventListener('change', () => {
       if (radio.checked) {
         requestGender = radio.value;
+        clearBody();
         fillBody();
       }
     });
   });
-  button.addEventListener('click', fillBody());
+  button.addEventListener('click', (event) => {
+    fillBody();
+  });
   bookmarkList.addEventListener('dragstart', dragstartHandler);
   bookmarkList.addEventListener('dragover', dragoverHandler);
   bookmarkList.addEventListener('dragend', (event) => { draggedItem.classList.remove('dragging'); });
 }
-
-export function copyToClipboard () {
-  function copyFunction (event) {
-    const textElement = event.target.parentElement.parentElement.firstElementChild;
-    console.log(textElement);
-    navigator.clipboard.writeText(textElement.innerText);
+/* function copyToClipboard () {
+  function addEventListenerForAllCopyButtons (event) {
+    const copyButtons = [...document.getElementsByClassName('copy-icon')];
+    copyButtons.forEach((element) => element.addEventListener('click', copyFunction));
   }
-  const copyButtons = [...document.getElementsByClassName('copy-icon')];
-  copyButtons.forEach((element) => element.addEventListener('click', copyFunction));
+  const button = document.getElementById('save-button');
+  const toggleButtons = document.querySelectorAll('input[name="gender-toggle"]');
+  toggleButtons.forEach((element) => {
+    element.addEventListener('click', addEventListenerForAllCopyButtons);
+  });
+  button.addEventListener('click', addEventListenerForAllCopyButtons);
 }
-
-export function removeElement () {
+*/
+function copyFunction (event) {
+  const textElement = event.target.parentElement.parentElement.firstElementChild;
+  console.log(textElement);
+  navigator.clipboard.writeText(textElement.innerText);
+}
+function removeFunction (event) {
+  const element = event.target.parentElement.parentElement;
+  element.remove();
+}
+/* function removeElement () {
   function removeFunction (event) {
     const element = event.target.parentElement.parentElement;
     element.remove();
   }
-  const deleteButtons = [...document.getElementsByClassName('delete-icon')];
-  deleteButtons.forEach((element) => element.addEventListener('click', removeFunction));
+  function addEventListenerForAllDeleteButtons (event) {
+    const deleteButtons = [...document.querySelectorAll('.delete-icon')];
+    console.log(deleteButtons);
+    deleteButtons.forEach((element) => element.addEventListener('click', removeFunction));
+  }
+  const button = document.getElementById('save-button');
+  const toggleButtons = document.querySelectorAll('input[name="gender-toggle"]');
+  toggleButtons.forEach((element) => {
+    element.addEventListener('click', addEventListenerForAllDeleteButtons);
+  });
+  button.addEventListener('click', addEventListenerForAllDeleteButtons);
 }
-
+*/
 export function saveName () {
   const saveButtons = document.getElementsByClassName('save-name-button');
   [...saveButtons].forEach(button => {
