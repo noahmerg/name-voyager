@@ -137,10 +137,6 @@ async function updateNames () {
   for (let i = page * numOfNamesPerPage; i < Math.min((page + 1) * numOfNamesPerPage, names.length); i++) {
     const element = names[i];
     resultsContainer.insertAdjacentHTML('beforeend', buildElementHTML(element));
-    /* resultsContainer.insertAdjacentHTML('beforeend',
-      `<div class="element ${element.gender}" id="${element.name}">${element.name}<span class="syllables-of-name">&nbsp;${element.syllables}</span>
-        <img src="./assets/favorite_FILL0_wght400_GRAD0_opsz24_red.svg" alt="favorite symbol" class="save-name-button">
-      </div>`); */
   }
 
   saveName(); // add listeners to new DOM children

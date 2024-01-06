@@ -188,7 +188,7 @@ export function bookmarkList () {
   }
   /**
    * copies name out of span into clipboard upon click
-   * @param {Event} event 
+   * @param {Event} event
    */
   function copyFunction (event) {
     const textElement = event.target.parentElement.parentElement.firstElementChild;
@@ -197,7 +197,7 @@ export function bookmarkList () {
   }
   /**
    * removes Element fav name upon click event
-   * @param {Event} event 
+   * @param {Event} event
    */
   function removeFunction (event) {
     const element = event.target.parentElement.parentElement;
