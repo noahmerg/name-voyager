@@ -1,7 +1,7 @@
 import { MongoClient, MongoError } from 'mongodb';
 import { connectToDatabase, closeDatabaseConnection } from './db.mjs';
 
-const uri = 'mongodb://localhost:27017';
+const uri = `mongodb+srv://noahmerg:CX6Ue4rcwgYWXJia@name-voyager.jgcwhtt.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri);
 const databaseName = 'name-voyager';
 const collectionName = 'names';

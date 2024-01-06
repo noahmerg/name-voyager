@@ -10,7 +10,7 @@ const PORT = process.argv[2] || 8080;
 const server = express();
 
 // mongo db
-const uri = 'mongodb://localhost:27017';
+const uri = `mongodb+srv://noahmerg:CX6Ue4rcwgYWXJia@name-voyager.jgcwhtt.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri);
 const databaseName = 'name-voyager';
 const namesCollectionName = 'names';
