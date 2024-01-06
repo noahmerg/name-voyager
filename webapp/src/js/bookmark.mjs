@@ -134,7 +134,7 @@ export function saveName () {
     button.addEventListener('click', event => {
       const name = event.currentTarget.parentElement.getAttribute('id');
       console.log(name); // sonst meckert semistandard
-      // add "name" to Bookmarklist ID will always be the exact same as the name itself
+      // add "name" to Bookm|arklist ID will always be the exact same as the name itself
     });
   });
 }
