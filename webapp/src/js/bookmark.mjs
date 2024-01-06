@@ -17,6 +17,7 @@ export function bookmarkPopup () {
     }
   });
 }
+
 export function bookmarkList () {
   const bookmarkList = document.querySelector('.bookmark-body');
   const toggleButtons = document.querySelectorAll('input[name="gender-toggle"]');
@@ -111,6 +112,7 @@ export function bookmarkList () {
   bookmarkList.addEventListener('dragover', dragoverHandler);
   bookmarkList.addEventListener('dragend', (event) => { draggedItem.classList.remove('dragging'); });
 }
+
 export function copyToClipboard () {
   function copyFunction (event) {
     const textElement = event.target.parentElement.parentElement.firstElementChild;
@@ -120,6 +122,7 @@ export function copyToClipboard () {
   const copyButtons = [...document.getElementsByClassName('copy-icon')];
   copyButtons.forEach((element) => element.addEventListener('click', copyFunction));
 }
+
 export function removeElement () {
   function removeFunction (event) {
     const element = event.target.parentElement.parentElement;
@@ -128,13 +131,26 @@ export function removeElement () {
   const deleteButtons = [...document.getElementsByClassName('delete-icon')];
   deleteButtons.forEach((element) => element.addEventListener('click', removeFunction));
 }
+
 export function saveName () {
   const saveButtons = document.getElementsByClassName('save-name-button');
   [...saveButtons].forEach(button => {
     button.addEventListener('click', event => {
       const name = event.currentTarget.parentElement.getAttribute('id');
-      console.log(name); // sonst meckert semistandard
-      // add "name" to Bookm|arklist ID will always be the exact same as the name itself
+      postName(name); // POST request to server to save name in db
     });
   });
+  async function postName (name) {
+    try {
+      await fetch('http://localhost:8080/bookmarklist', {
+        method: 'POST',
+        body: JSON.stringify({ name }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
 }
