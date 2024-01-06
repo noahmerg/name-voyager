@@ -18,7 +18,7 @@ async function connectToDatabase () {
 
 async function closeDatabaseConnection () {
   try {
-    if (client && client.isConnected) {
+    if (client && client.topology && client.topology.isConnected()) {
       await client.close();
       console.log('Disconnected from MongoDB');
     } else {
@@ -26,7 +26,7 @@ async function closeDatabaseConnection () {
     }
   } catch (error) {
     console.error('Error closing MongoDB connection:', error);
+    throw error;
   }
 }
-
 export { connectToDatabase, closeDatabaseConnection };
