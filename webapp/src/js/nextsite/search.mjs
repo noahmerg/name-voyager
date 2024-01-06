@@ -26,7 +26,7 @@ export async function getNames () {
 
     const syllablesVal = document.getElementById('syllables-slider').value;
 
-    const response = await fetch(`http://localhost:8080/names?gender=${genderStr}&&${prefixStr}=${prefixVal}&&${suffixStr}=${suffixVal}&&syllables=${syllablesVal}`);
+    const response = await fetch(`https://name-voyager.onrender.com/names?gender=${genderStr}&&${prefixStr}=${prefixVal}&&${suffixStr}=${suffixVal}&&syllables=${syllablesVal}`);
     const result = await response.json();
     numOfNames = result.length;
 
