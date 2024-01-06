@@ -75,25 +75,24 @@
         </section>
     </article>
     <article id="nextsite">
-        <section class="filter-and-results">
             <div class="filter-container">
                 <fieldset class="filter-element">
                     <legend>Gender</legend>
                     <div class="radiobuttons">
-                        <input type="radio" name="gender" class="cool-radio" id="gender-w" value="w" checked />
+                        <input type="radio" name="gender" class="cool-radio" id="gender-w" value="w" />
                             <label class="radio-label" for="gender-w">Women</label>
+                        <input type="radio" name="gender" class="cool-radio" id="gender-b" value="b" checked/>
+                            <label class="radio-label" for="gender-b">Both</label>
                         <input type="radio" name="gender" class="cool-radio" id="gender-m" value="m"/>
                             <label class="radio-label" for="gender-m">Man</label>
-                        <input type="radio" name="gender" class="cool-radio" id="gender-b" value="b"/>
-                            <label class="radio-label" for="gender-b">Both</label>
                     </div>
                 </fieldset>
                 <fieldset class="filter-element">
                     <legend>Prefix</legend>
                     <div class="radiobuttons">
-                        <input type="radio" name="prefix" class="cool-radio" id="prefix-include" value="include" checked />
+                        <input type="radio" name="prefix" class="cool-radio" id="prefix-include" value="includeprefix" checked />
                             <label class="radio-label" for="prefix-include">Include</label>
-                        <input type="radio" name="prefix" class="cool-radio" id="prefix-exclude" value="exclude"/>
+                        <input type="radio" name="prefix" class="cool-radio" id="prefix-exclude" value="excludeprefix"/>
                             <label class="radio-label" for="prefix-exclude">Exclude</label>
                     </div>
                     <input type="text" class="cool-text" id="prefix-text" placeholder="Enter prefix">
@@ -101,9 +100,9 @@
                 <fieldset class="filter-element">
                     <legend>Suffix</legend>
                     <div class="radiobuttons">
-                        <input type="radio" name="suffix" class="cool-radio" id="suffix-include" value="include" checked />
+                        <input type="radio" name="suffix" class="cool-radio" id="suffix-include" value="includesuffix" checked />
                             <label class="radio-label" for="suffix-include">Include</label>
-                        <input type="radio" name="suffix" class="cool-radio" id="suffix-exclude" value="exclude"/>
+                        <input type="radio" name="suffix" class="cool-radio" id="suffix-exclude" value="excludesuffix"/>
                             <label class="radio-label" for="suffix-exclude">Exclude</label>
                     </div>
                     <input type="text" class="cool-text" id="suffix-text" placeholder="Enter suffix" >
@@ -112,71 +111,31 @@
                     <legend id="syllables-legend">Syllables</legend>
                     <input type="range" min="0" max="9" value="0" class="slider" id="syllables-slider">
                 </fieldset>
+                <fieldset class="filter-element">
+                    <legend id="numOfNames-legend">Number of Names per Page</legend>
+                    <input type="range" min="20" max="100" value="0" class="slider" step="20" id="numOfNames-slider">
+                </fieldset>
                 <div class="button-container-element">
-                    <span id="reset-button">Reset</span>
+                    <span id="reset-button">Reset Filter</span>
                     <span id="search-button">Search</span>
                 </div>
+                <fieldset class="filter-element pages-element">
+                    <legend>Page</legend>
+                    <div class="pages-container">
+                        <div id="page-back" class="page-nav">
+                            <img src="./assets/navleft.svg" class="nav" alt="navigation left">
+                        </div>
+                        <div id="current-page" class="page-nav">
+                        </div>
+                        <div id="page-forward" class="page-nav">
+                            <img src="./assets/navright.svg" class="nav" alt="navigation right">
+                        </div>
+                    </div>
+                </fieldset>
             </div>
             <div class="grid-bar"></div>
             <div class="results-container">
-                <div class="names-container">
-                    <div class="element w">Dimitris-Konstantinos</div>
-                    <div class="element w">Dimitris-Konstantinos</div>
-                    <div class="element w">Amelia</div>
-                    <div class="element m">Dimitris-Konstantinos</div>
-                    <div class="element m">Liam</div>
-                    <div class="element w">Mia</div>
-                    <div class="element m">Leo</div>
-                    <div class="element w">Asher</div>
-                    <div class="element m">Ethan</div>
-                    <div class="element m">Sebastian</div>
-                    <div class="element w">Aria</div>
-                    <div class="element w">Aurora</div>
-                    <div class="element w">Ellie</div>
-                    <div class="element w">Mila</div>
-                    <div class="element w">Sofia</div>
-                    <div class="element m">Benjamin</div>
-                    <div class="element m">Jackson</div>
-                    <div class="element w">Ella</div>
-                    <div class="element w">Violet</div>
-                    <div class="element m">Serenity</div>
-                    <div class="element m">Zion</div>
-                    <div class="element w">Addison</div>
-                    <div class="element m">Jeremiah</div>
-                    <div class="element w">Alice</div>
-                    <div class="element m">Lincoln</div>
-                    <div class="element w">Alice</div>
-                    <div class="element w">Bella</div>
-                    <div class="element w">Sadie</div>
-                    <div class="element m">Adrian</div>
-                    <div class="element m">Anthony</div>
-                    <div class="element m">Cooper</div>
-                    <div class="element w">Amara</div>
-                    <div class="element w">Autumn</div>
-                    <div class="element m">Micah</div>
-                    <div class="element w">Summer</div>
-                    <div class="element m">Cameron</div>
-                    <div class="element m">Emery</div>
-                    <div class="element m">Ryan</div>
-                    <div class="element w">Hannah</div>
-                    <div class="element m">Rowan</div>
-                    <div class="element m">Xavier</div>
-                    <div class="element w">Brooklyn</div>
-                    <div class="element w">Madelyn</div>
-                    <div class="element m">Wesley</div>
-                    <div class="element w">Leah</div>
-                    <div class="element m">Weston</div>
-                    <div class="element w">Maria</div>
-                    <div class="element m">Andrew</div>
-                    <div class="element m">Joshua</div>
-                    <div class="element w">Savannah</div>
-                    <div class="element m">Silas</div>
-                    <div class="element m">Aubrey</div>
-                    <div class="element w">Jade</div>
-                    <div class="element w">Sophia</div>
-                </div>
             </div>
-        </section>
     </article>
     <!--placeholder section-->
     <!--remove on release-->

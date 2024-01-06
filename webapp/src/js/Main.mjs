@@ -3,9 +3,9 @@
 
 import { handleVisibilityChange } from './attention-seeker.mjs';
 import { initializeSlider } from './nextsite/slider.mjs';
-import { searchListener } from './nextsite/search.mjs';
+import { searchListener, pageListener } from './nextsite/search.mjs';
 import { resetListener } from './nextsite/reset.mjs';
-import { bookmarkPopup, bookmarkList, copyToClipboard, removeElement } from './bookmark.mjs';
+import { bookmarkPopup, bookmarkList, copyToClipboard, removeElement, saveName } from './bookmark.mjs';
 
 import { starMover } from './stars.mjs';
 const images = document.querySelectorAll('.star-images');
@@ -20,6 +20,8 @@ window.onload = function () {
   copyToClipboard();
   removeElement();
   starMover();
+  saveName();
+  pageListener();
   images.forEach(function (img) {
     img.addEventListener('contextmenu', function (e) {
       e.preventDefault();
