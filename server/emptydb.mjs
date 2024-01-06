@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 import { connectToDatabase, closeDatabaseConnection } from './db.mjs';
 
 // TO RUN A MONGO INSTANCE: sudo mongod --dbpath ~/data/db
-const uri = `mongodb+srv://noahmerg:CX6Ue4rcwgYWXJia@name-voyager.jgcwhtt.mongodb.net/?retryWrites=true&w=majority`;
+const uri = 'mongodb+srv://noahmerg:CX6Ue4rcwgYWXJia@name-voyager.jgcwhtt.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
 
 const databaseName = 'name-voyager';
