@@ -124,8 +124,23 @@ server.post('/bookmarklist', async (request, response) => {
     } else {
       response.status(404).json({ message: 'Dokument nicht gefunden' });
     }
-  } catch {
+  } catch (error) {
     response.status(404).json({ message: 'Fehler, entweder Duplikate oder sonstiges' });
+  } finally {
+    client.close();
+  }
+});
+server.patch('/bookmarklist/:name', async function (request, response) {
+  const name = request.params.name;
+  const newIndex = request.body.newIndex;
+  try {
+    await client.connect();
+    const db = client.db(databaseName);
+    const bookmarkCollection = db.collection(bookmarkCollectionName);
+    await bookmarkCollection.updateOne({ name }, { $set: { index: newIndex } });
+    response.status(200).json({ message: 'Index erfolgreich geupdated' });
+  } catch (error) {
+    response.status(500).json({ message: 'Konnte Index nicht updaten' });
   } finally {
     client.close();
   }
