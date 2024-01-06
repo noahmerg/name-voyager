@@ -1,14 +1,18 @@
 import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { namesCollection } from './db.mjs';
+import { connectToDatabase, namesCollection } from './db.mjs';
 import { countSyllables } from 'syllabificate';
+
+// sudo mongod --dbpath ~/data/db
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 async function populateDatabase () {
   try {
+    connectToDatabase();
+
     const csvData = await fs.readFileSync(path.resolve(__dirname, './Namen.csv'), 'utf8');
 
     const rows = csvData.trim().split(/\r?\n/).map(row => row.split(';'));
