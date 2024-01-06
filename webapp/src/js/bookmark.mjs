@@ -168,7 +168,7 @@ export function saveName () {
   [...saveButtons].forEach(button => {
     button.addEventListener('click', event => {
       const name = event.currentTarget.parentElement.getAttribute('id');
-      postName(name); // POST request to server to save name in db
+      postName(name); // POST request to server to save name in datab
     });
   });
   async function postName (name) {
