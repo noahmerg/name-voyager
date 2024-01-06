@@ -1,5 +1,52 @@
 // main: "../../main.less"
 
+#pages-container {
+  display: none;
+  grid-template-columns: 30px 30px auto 30px 30px;
+  grid-template-rows: 30px;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.page-nav {
+  border: solid 1px rgba(87, 95, 104, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#input-current-page {
+  background: transparent;
+  border: none;
+  border-bottom: solid 1px rgba(145, 211, 255, 0.349);
+  width: 100px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+#input-current-page:focus{
+  outline-width: 0;
+  border-bottom: solid 1px @accent-color;
+  transition: all .3s;
+}
+
+#page-doubleback {
+  border-bottom-left-radius: 20%;
+  border-top-left-radius: 20%;
+}
+
+#page-doubleforward {
+  border-bottom-right-radius: 20%;
+  border-top-right-radius: 20%;
+}
+
+.nav {
+  filter: brightness(0) invert(1);
+  width: 150%;
+}
+
 .element {
   background-color: transparent;
   color: #colors[text];

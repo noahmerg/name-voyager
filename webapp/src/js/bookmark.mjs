@@ -42,7 +42,27 @@ export function bookmarkList () {
       result.forEach((value) => {
         const exists = Array.from(bookmarkList.getElementsByClassName('favname')).some(el => el.textContent.includes(value.name));
         if (!exists) {
+<<<<<<< HEAD
           createFavName(value);
+=======
+          const element = createFavNameElement(value);
+          const text = createNameText(value);
+          const iconContainer = createIconContainer();
+          const dragIconPath = './assets/drag_handle.svg';
+          const copyIconPath = './assets/content_copy.svg';
+          const deleteIconPath = './assets/delete.svg';
+          if (requestGender === 'both') {
+            const dragIcon = createDragIcon(dragIconPath);
+            iconContainer.appendChild(dragIcon);
+          }
+          const copyIcon = createCopyIcon(copyIconPath);
+          const deleteIcon = createDeleteIcon(deleteIconPath);
+          element.appendChild(text);
+          element.appendChild(iconContainer);
+          iconContainer.appendChild(copyIcon);
+          iconContainer.appendChild(deleteIcon);
+          bookmarkList.appendChild(element);
+>>>>>>> a7106da11dc7fbb102296a7d0602a927579fed5a
         }
       });
     } catch (error) {
@@ -267,7 +287,7 @@ export function saveName () {
   [...saveButtons].forEach(button => {
     button.addEventListener('click', event => {
       const name = event.currentTarget.parentElement.getAttribute('id');
-      postName(name); // POST request to server to save name in db
+      postName(name); // POST request to server to save name in datab
     });
   });
   async function postName (name) {
