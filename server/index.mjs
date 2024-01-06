@@ -1,7 +1,7 @@
 import path from 'path';
 import reload from 'reload';
 import express from 'express';
-import { bookmarkCollection, closeDatabaseConnection, connectToDatabase, namesCollection } from './db.mjs';
+import { bookmarkCollection, namesCollection } from './db.mjs';
 
 // use second argument or 8080 as PORT for server
 const PORT = process.argv[2] || 8080;
@@ -23,20 +23,18 @@ reload(server).then(function (reloadReturned) {
 
 // gets specific name with its data e.g. localhost:8080/name/noah
 server.get('/name/:name', async (request, response) => {
-  await connectToDatabase();
   try {
     const searchedName = request.params.name;
     const cursor = await namesCollection.find({ name: searchedName });
     const ergebnis = await cursor.toArray();
     response.json(ergebnis);
-  } finally {
-    closeDatabaseConnection();
+  } catch (error) {
+    console.error(error);
   }
 });
 
 // gets all names or names that fit the queries e.g. localhost:8080/names?gender=m&&syllables=2&&includsuffix=ah&&includeprefix=No
 server.get('/names', async (request, response) => {
-  await connectToDatabase();
   try {
     const filter = {};
     // Gender
@@ -76,14 +74,13 @@ server.get('/names', async (request, response) => {
     const ergebnis = await cursor.toArray();
     // console.log(ergebnis);
     response.json(ergebnis);
-  } finally {
-    closeDatabaseConnection();
+  } catch (error) {
+    console.error(error);
   }
 });
 
 // gets all names of the bookmarklist and filters genders if specified localhost/bookmarklist?gender=m
 server.get('/bookmarklist', async (request, response) => {
-  await connectToDatabase();
   try {
     const filter = {};
     if (request.query.gender) {
@@ -92,14 +89,13 @@ server.get('/bookmarklist', async (request, response) => {
     const cursor = await bookmarkCollection.find(filter).sort({ index: 1 });
     const ergebnis = await cursor.toArray();
     response.json(ergebnis);
-  } finally {
-    closeDatabaseConnection();
+  } catch (error) {
+    console.error(error);
   }
 });
 // adds a name to the bookmark list
 server.post('/bookmarklist', async (request, response) => {
   const name = request.body.name;
-  await connectToDatabase();
   try {
     const index = await bookmarkCollection.countDocuments() + 1;
     const originalData = await namesCollection.findOne({ name });
@@ -113,20 +109,15 @@ server.post('/bookmarklist', async (request, response) => {
     }
   } catch (error) {
     response.status(404).json({ message: 'Fehler, entweder Duplikate oder sonstiges' });
-  } finally {
-    await closeDatabaseConnection();
   }
 });
 server.patch('/bookmarklist/:name', async function (request, response) {
   const name = request.params.name;
   const newIndex = request.body.newIndex;
-  await connectToDatabase();
   try {
     await bookmarkCollection.updateOne({ name }, { $set: { index: newIndex } });
     response.status(200).json({ message: 'Index erfolgreich geupdated' });
   } catch (error) {
     response.status(500).json({ message: 'Konnte Index nicht updaten' });
-  } finally {
-    await closeDatabaseConnection();
   }
 });

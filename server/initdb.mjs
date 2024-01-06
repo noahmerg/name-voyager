@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { connectToDatabase, closeDatabaseConnection, namesCollection } from './db.mjs';
+import { namesCollection } from './db.mjs';
 import { countSyllables } from 'syllabificate';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -9,8 +9,6 @@ const __dirname = dirname(__filename);
 
 async function populateDatabase () {
   try {
-    await connectToDatabase();
-
     const csvData = await fs.readFileSync(path.resolve(__dirname, './Namen.csv'), 'utf8');
 
     const rows = csvData.trim().split(/\r?\n/).map(row => row.split(';'));
@@ -26,7 +24,6 @@ async function populateDatabase () {
     console.error('Error during database population:', error);
     process.exit(-1);
   } finally {
-    await closeDatabaseConnection();
     process.exit(0);
   }
 }
