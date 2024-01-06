@@ -1,0 +1,56 @@
+// main: "../../main.less"
+
+.element {
+  background-color: transparent;
+  color: #colors[text];
+  padding: 18px;
+  box-sizing: border-box;
+  font-size: 1.5rem;
+  border-radius: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80px;
+}
+
+.syllables-of-name {
+  color: @text-secondary-color;
+}
+
+.save-name-button {
+  margin-left: auto;
+  cursor: pointer;
+  filter: brightness(0) invert(1);
+  transition: filter 0.5s ease, transform 0.2s ease; 
+}
+
+.save-name-button:hover {
+  filter: brightness(1) invert(0) drop-shadow(0 0 2px red);
+  transform: scale(1.1); 
+}
+
+.save-name-button:active {
+  transform: scale(1.5);
+  filter: brightness(1) invert(0);
+}
+
+.w {
+  border: solid 2px @w-color;
+}
+
+.m {
+  border: solid 2px @m-color;
+}
+
+
+@media screen and (max-width: 1000px) {
+  .element {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1001px) {
+  .element {
+    width: calc(50% - 8px);
+  }
+}
