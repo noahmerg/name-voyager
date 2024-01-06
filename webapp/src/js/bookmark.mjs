@@ -131,6 +131,7 @@ export function bookmarkList () {
       if (!response.ok) {
         throw new Error('Couldnt update index of Element');
       }
+      console.log('hallo');
     } catch (error) {
       console.error('Error:', error);
     }
