@@ -8,6 +8,7 @@ let numOfNamesPerPage = 0;
 export function searchListener () {
   const searchButton = document.getElementById('search-button');
   searchButton.addEventListener('click', event => {
+    document.getElementById('pages-container').style.display = 'grid';
     getNames();
     page = 0;
   });
@@ -32,9 +33,8 @@ export async function getNames () {
 
     numOfNamesPerPage = document.getElementById('numOfNames-slider').value;
 
-    document.getElementById('current-page').innerHTML = `${page + 1} of ${Math.ceil(numOfNames / numOfNamesPerPage)}`;
-    console.log(result);
     await createNameDOMObjects(result, page, numOfNamesPerPage);
+    document.getElementById('current-page').innerHTML = `${page + 1} of ${Math.ceil(numOfNames / numOfNamesPerPage)}`;
   } catch (error) {
     console.error(error.message);
   }
@@ -80,13 +80,18 @@ function pageForward () {
 }
 
 async function createNameDOMObjects (json) {
-  document.getElementsByClassName('results-container')[0].innerHTML = '';
+  const resultsContainer = document.getElementsByClassName('results-container')[0];
+
+  // Select only the elements you want to remove (exclude those that shouldn't be deleted)
+  [...resultsContainer.getElementsByClassName('element')].forEach(elem => elem.remove());
+
   for (let i = page * numOfNamesPerPage; i < Math.min((page + 1) * numOfNamesPerPage, json.length); i++) {
     const element = json[i];
-    document.getElementsByClassName('results-container')[0].insertAdjacentHTML('beforeend',
+    resultsContainer.insertAdjacentHTML('beforeend',
       `<div class="element ${element.gender}" id="${element.name}">${element.name}<span class="syllables-of-name">&nbsp;${element.syllables}</span>
         <img src="./assets/favorite_FILL0_wght400_GRAD0_opsz24_red.svg" alt="favorite symbol" class="save-name-button">
       </div>`);
   }
-  saveName(); // add listeners to new dom childs / we are not removing them currently but i wouldn't know how chat gpt says its generally a good idea
+
+  saveName(); // add listeners to new DOM children
 }

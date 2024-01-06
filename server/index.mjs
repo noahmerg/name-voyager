@@ -78,7 +78,7 @@ server.get('/names', async (request, response) => {
       const regex = new RegExp(regexString);
       filter.name = { $regex: regex };
     }
-    console.log(filter);
+    // console.log(filter);
     const cursor = await dbCollection.find(filter);
     const ergebnis = await cursor.toArray();
     // console.log(ergebnis);

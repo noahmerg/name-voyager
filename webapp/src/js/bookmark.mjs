@@ -17,6 +17,7 @@ export function bookmarkPopup () {
     }
   });
 }
+
 export function bookmarkList () {
   const bookmarkList = document.querySelector('.bookmark-body');
   const toggleButtons = document.querySelectorAll('input[name="gender-toggle"]');
@@ -203,8 +204,20 @@ export function saveName () {
   [...saveButtons].forEach(button => {
     button.addEventListener('click', event => {
       const name = event.currentTarget.parentElement.getAttribute('id');
-      console.log(name); // sonst meckert semistandard
-      // add "name" to Bookm|arklist ID will always be the exact same as the name itself
+      postName(name); // POST request to server to save name in db
     });
   });
+  async function postName (name) {
+    try {
+      await fetch('http://localhost:8080/bookmarklist', {
+        method: 'POST',
+        body: JSON.stringify({ name }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
 }
