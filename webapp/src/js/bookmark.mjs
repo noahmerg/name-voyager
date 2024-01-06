@@ -38,7 +38,6 @@ export function bookmarkList () {
       result.forEach((value) => {
         const exists = Array.from(bookmarkList.getElementsByClassName('favname')).some(el => el.textContent.includes(value.name));
         if (!exists) {
-          console.log('penis');
           const element = createFavNameElement(value);
           const text = createNameText(value);
           const iconContainer = createIconContainer();
