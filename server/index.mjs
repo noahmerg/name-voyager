@@ -54,7 +54,9 @@ server.get('/names', async (request, response) => {
 
     // Syllables
     if (request.query.syllables) {
-      filter.syllables = { $eq: parseInt(request.query.syllables) };
+      if (parseInt(request.query.syllables) !== 0) {
+        filter.syllables = { $eq: parseInt(request.query.syllables) };
+      }
     }
     let regexString = '';
 
@@ -67,9 +69,9 @@ server.get('/names', async (request, response) => {
 
     // Suffix
     if (request.query.excludesuffix) {
-      regexString += `(?<!${request.query.excludesuffix})$`;
+      regexString += `.*(?<!${request.query.excludesuffix})$`;
     } else if (request.query.includesuffix) {
-      regexString += `${request.query.includesuffix}$`;
+      regexString += `.*${request.query.includesuffix}$`;
     }
 
     if (regexString) {

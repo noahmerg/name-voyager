@@ -162,3 +162,13 @@ function removeFunction (event) {
   button.addEventListener('click', addEventListenerForAllDeleteButtons);
 }
 */
+export function saveName () {
+  const saveButtons = document.getElementsByClassName('save-name-button');
+  [...saveButtons].forEach(button => {
+    button.addEventListener('click', event => {
+      const name = event.currentTarget.parentElement.getAttribute('id');
+      console.log(name); // sonst meckert semistandard
+      // add "name" to Bookm|arklist ID will always be the exact same as the name itself
+    });
+  });
+}
