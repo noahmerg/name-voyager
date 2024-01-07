@@ -203,8 +203,10 @@ function copyFunction (event) {
    */
 function removeFunction (event) {
   const element = event.target.parentElement.parentElement;
+  const name = event.target.parentElement.parentElement.querySelector('span').innerHTML;
   element.remove();
-  deleteNameFromDB(element.getAttribute('id'));
+  deleteNameFromDB(name);
+  markName(name, false);
 }
 /**
    * selects dragged Item and adds dragging as class, allows dragging functionality
