@@ -121,3 +121,12 @@ server.patch('/bookmarklist/:name', async function (request, response) {
     response.status(500).json({ message: 'Konnte Index nicht updaten' });
   }
 });
+server.delete('/bookmarklist/:name', async (request, response) => {
+  try {
+    await bookmarkCollection.deleteOne({ name: request.params.name });
+    response.status(200).json({ message: 'Name erfolgreich gelöscht' });
+    console.log('löschen lol');
+  } catch (error) {
+    response.status(500).json({ message: 'Konnte Name nicht löschen' });
+  }
+});

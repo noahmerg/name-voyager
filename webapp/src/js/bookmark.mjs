@@ -1,3 +1,5 @@
+import { markBookmarkedNames } from './nextsite/search.mjs';
+
 /**
  * changes text of save button and opens/closes bookmarklist
  */
@@ -52,7 +54,6 @@ async function fillBody () {
      * @param {JSON} value needed to pull name and index from it
      */
   function createFavName (value) {
-    console.log('penis');
     const element = createFavNameContainer(value);
     const text = createNameText(value);
     const iconContainer = createIconContainer();
@@ -202,6 +203,7 @@ function copyFunction (event) {
 function removeFunction (event) {
   const element = event.target.parentElement.parentElement;
   element.remove();
+  deleteNameFromDB(element.getAttribute('id'));
 }
 /**
    * selects dragged Item and adds dragging as class, allows dragging functionality
@@ -277,10 +279,18 @@ export function saveName () {
   const saveButtons = document.getElementsByClassName('save-name-button');
   [...saveButtons].forEach(button => {
     button.addEventListener('click', async (event) => {
-      const name = event.currentTarget.parentElement.getAttribute('id');
-      await postName(name); // POST request to server to save name in db
-      clearBody();
-      await fillBody();
+      const nameContainer = event.currentTarget.parentElement;
+      const name = nameContainer.getAttribute('id');
+      const isLiked = nameContainer.getAttribute('data-liked') === 'true';
+      if (!isLiked) {
+        await postName(name);
+        nameContainer.setAttribute('data-liked', 'true');
+      } else {
+        await deleteNameFromDB(name);
+        nameContainer.setAttribute('data-liked', 'false');
+      }
+      fillBody();
+      markBookmarkedNames();
     });
   });
   async function postName (name) {
@@ -295,5 +305,18 @@ export function saveName () {
     } catch (error) {
       console.error(error.message);
     }
+  }
+}
+
+async function deleteNameFromDB (name) {
+  try {
+    await fetch(`http://localhost:8080/bookmarklist/${name}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  } catch (error) {
+    console.error(error.message);
   }
 }

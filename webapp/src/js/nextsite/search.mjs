@@ -8,6 +8,8 @@ let numOfNames = 0;
 let numOfNamesPerPage = 0;
 let maxPage = 0;
 let names = '';
+let stringNames = [];
+let bookmarkStringNames = [];
 
 let doubleleft = document.getElementById('page-doubleback');
 let left = document.getElementById('page-back');
@@ -21,6 +23,7 @@ export function addSearchListener () {
   document.getElementById('search-button').addEventListener('click', event => {
     document.getElementById('pages-container').style.display = 'grid';
     getNames();
+    getBookmarkNames();
   });
 }
 
@@ -31,6 +34,17 @@ export async function getNames () {
 
     updateVariables(result);
     updateDOMTree();
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+export async function getBookmarkNames () {
+  try {
+    const response = await fetch('http://localhost:8080/bookmarklist');
+    const bookmarkNames = await response.json();
+    bookmarkStringNames = bookmarkNames.map(bookmark => bookmark.name);
+    console.log(bookmarkStringNames);
   } catch (error) {
     console.error(error.message);
   }
@@ -102,6 +116,7 @@ function updateDOMTree () {
   updateCursor();
   updateCurrentPageLabel();
   updateNames();
+  markBookmarkedNames();
 }
 
 function updateCursor () {
@@ -135,20 +150,34 @@ async function updateNames () {
   removeAllNames();
 
   for (let i = page * numOfNamesPerPage; i < Math.min((page + 1) * numOfNamesPerPage, names.length); i++) {
-    const element = names[i];
-    resultsContainer.insertAdjacentHTML('beforeend', buildElementHTML(element));
+    resultsContainer.insertAdjacentHTML('beforeend', buildElementHTML(names[i]));
+    stringNames.push(names[i].name);
   }
-
   saveName(); // add listeners to new DOM children
+}
+
+export async function markBookmarkedNames () {
+  await getBookmarkNames();
+  stringNames.forEach(stringName => {
+    bookmarkStringNames.forEach(bookmarkName => {
+      const element = resultsContainer.querySelector(`#${stringName}`);
+      if (element.getAttribute('data-liked') === 'true') {
+        element.querySelector('img').style.filter = 'brightness(1) invert(0) drop-shadow(0 0 2px red)';
+      } else {
+        element.querySelector('img').style.filter = 'brightness(0) invert(1)';
+      }
+    });
+  });
 }
 
 function removeAllNames () {
   // Select only the elements you want to remove (exclude those that shouldn't be deleted)
   [...resultsContainer.getElementsByClassName('element')].forEach(elem => elem.remove());
+  stringNames = [];
 }
 
 function buildElementHTML (element) {
   return `<div class="element ${element.gender}" id="${element.name}">${element.name}<span class="syllables-of-name">&nbsp;${element.syllables}</span>
-        <img src="./assets/favorite_FILL0_wght400_GRAD0_opsz24_red.svg" alt="favorite symbol" class="save-name-button">
-      </div>`;
+            <img src="./assets/favorite_FILL0_wght400_GRAD0_opsz24_red.svg" alt="favorite symbol" class="save-name-button">
+          </div>`;
 }
