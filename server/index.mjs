@@ -93,6 +93,21 @@ server.get('/bookmarklist', async (request, response) => {
     console.error(error);
   }
 });
+server.get('/bookmarklist/:name', async (request, response) => {
+  try {
+    const name = request.params.name;
+    const bookmarkedInfo = await bookmarkCollection.findOne({ name });
+
+    if (bookmarkedInfo) {
+      response.status(200).json(bookmarkedInfo);
+    } else {
+      response.status(404).json({ message: 'Name not found in the bookmarked collection' });
+    }
+  } catch (error) {
+    console.error(error);
+    response.status(500).json({ message: 'Internal server error' });
+  }
+});
 // adds a name to the bookmark list
 server.post('/bookmarklist', async (request, response) => {
   const name = request.body.name;
@@ -107,6 +122,7 @@ server.post('/bookmarklist', async (request, response) => {
     } else {
       response.status(404).json({ message: 'Dokument nicht gefunden' });
     }
+    console.log(`${request.body.name} hinzugefügt`);
   } catch (error) {
     response.status(404).json({ message: 'Fehler, entweder Duplikate oder sonstiges' });
   }
@@ -125,7 +141,7 @@ server.delete('/bookmarklist/:name', async (request, response) => {
   try {
     await bookmarkCollection.deleteOne({ name: request.params.name });
     response.status(200).json({ message: 'Name erfolgreich gelöscht' });
-    console.log('löschen lol');
+    console.log(`${request.params.name} gelöscht`);
   } catch (error) {
     response.status(500).json({ message: 'Konnte Name nicht löschen' });
   }

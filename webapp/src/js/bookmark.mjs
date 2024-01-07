@@ -1,4 +1,5 @@
-import { markBookmarkedNames } from './nextsite/search.mjs';
+// import { namesCollection } from '../../../server/db.mjs';
+import { isNameBookmarked, markName } from './nextsite/search.mjs';
 
 /**
  * changes text of save button and opens/closes bookmarklist
@@ -281,30 +282,43 @@ export function saveName () {
     button.addEventListener('click', async (event) => {
       const nameContainer = event.currentTarget.parentElement;
       const name = nameContainer.getAttribute('id');
-      const isLiked = nameContainer.getAttribute('data-liked') === 'true';
-      if (!isLiked) {
-        await postName(name);
-        nameContainer.setAttribute('data-liked', 'true');
-      } else {
+      if (await isNameBookmarked(name)) {
         await deleteNameFromDB(name);
-        nameContainer.setAttribute('data-liked', 'false');
+        markName(name, false);
+      } else {
+        await postName(name);
+        markName(name, true);
       }
       fillBody();
-      markBookmarkedNames();
     });
   });
-  async function postName (name) {
-    try {
-      await fetch('http://localhost:8080/bookmarklist', {
-        method: 'POST',
-        body: JSON.stringify({ name }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-    } catch (error) {
-      console.error(error.message);
-    }
+}
+
+function removeByName (name) {
+  const bookmarkList = document.getElementById('bookmark-list');
+
+  // Use Array.from to convert the NodeList to an array
+  const spans = Array.from(bookmarkList.querySelectorAll('span'));
+
+  // Find the span with the matching text
+  const matchingSpan = spans.find(span => span.innerText === name);
+
+  if (matchingSpan) {
+    matchingSpan.parentElement.remove();
+  }
+}
+
+async function postName (name) {
+  try {
+    await fetch('http://localhost:8080/bookmarklist', {
+      method: 'POST',
+      body: JSON.stringify({ name }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  } catch (error) {
+    console.error(error.message);
   }
 }
 
@@ -316,6 +330,7 @@ async function deleteNameFromDB (name) {
         'Content-Type': 'application/json'
       }
     });
+    removeByName(name);
   } catch (error) {
     console.error(error.message);
   }

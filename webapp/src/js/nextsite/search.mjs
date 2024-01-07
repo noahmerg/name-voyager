@@ -8,8 +8,7 @@ let numOfNames = 0;
 let numOfNamesPerPage = 0;
 let maxPage = 0;
 let names = '';
-let stringNames = [];
-let bookmarkStringNames = [];
+const bookmarkNames = new Set();
 
 let doubleleft = document.getElementById('page-doubleback');
 let left = document.getElementById('page-back');
@@ -23,7 +22,6 @@ export function addSearchListener () {
   document.getElementById('search-button').addEventListener('click', event => {
     document.getElementById('pages-container').style.display = 'grid';
     getNames();
-    getBookmarkNames();
   });
 }
 
@@ -34,17 +32,6 @@ export async function getNames () {
 
     updateVariables(result);
     updateDOMTree();
-  } catch (error) {
-    console.error(error.message);
-  }
-}
-
-export async function getBookmarkNames () {
-  try {
-    const response = await fetch('http://localhost:8080/bookmarklist');
-    const bookmarkNames = await response.json();
-    bookmarkStringNames = bookmarkNames.map(bookmark => bookmark.name);
-    console.log(bookmarkStringNames);
   } catch (error) {
     console.error(error.message);
   }
@@ -112,11 +99,10 @@ function pageDoubleForward () {
   updateDOMTree();
 }
 
-function updateDOMTree () {
+export function updateDOMTree () {
   updateCursor();
   updateCurrentPageLabel();
   updateNames();
-  markBookmarkedNames();
 }
 
 function updateCursor () {
@@ -148,36 +134,41 @@ function updateCurrentPageLabel () {
 
 async function updateNames () {
   removeAllNames();
-
   for (let i = page * numOfNamesPerPage; i < Math.min((page + 1) * numOfNamesPerPage, names.length); i++) {
-    resultsContainer.insertAdjacentHTML('beforeend', buildElementHTML(names[i]));
-    stringNames.push(names[i].name);
+    resultsContainer.insertAdjacentHTML('beforeend', await buildElementHTML(names[i]));
+    markName(names[i].name, await isNameBookmarked(names[i].name));
   }
   saveName(); // add listeners to new DOM children
 }
 
-export async function markBookmarkedNames () {
-  await getBookmarkNames();
-  stringNames.forEach(stringName => {
-    bookmarkStringNames.forEach(bookmarkName => {
-      const element = resultsContainer.querySelector(`#${stringName}`);
-      if (element.getAttribute('data-liked') === 'true') {
-        element.querySelector('img').style.filter = 'brightness(1) invert(0) drop-shadow(0 0 2px red)';
-      } else {
-        element.querySelector('img').style.filter = 'brightness(0) invert(1)';
-      }
-    });
-  });
+export async function isNameBookmarked (name) {
+  return bookmarkNames.has(name);
+}
+
+export function markName (name, newState) {
+  // Use querySelector to select the element with the specific ID
+  const nameElement = resultsContainer.querySelector(`#${name}`);
+
+  // Update the src attribute for the save-name-button's img within the selected element
+  if (nameElement) {
+    const saveButtonImg = nameElement.getElementsByTagName('img')[0];
+    if (saveButtonImg) {
+      saveButtonImg.style.filter = newState
+        ? 'brightness(1) invert(0)'
+        : 'brightness(0) invert(1)';
+      newState ? bookmarkNames.add(name) : bookmarkNames.delete(name);
+    }
+  }
 }
 
 function removeAllNames () {
   // Select only the elements you want to remove (exclude those that shouldn't be deleted)
   [...resultsContainer.getElementsByClassName('element')].forEach(elem => elem.remove());
-  stringNames = [];
 }
 
-function buildElementHTML (element) {
-  return `<div class="element ${element.gender}" id="${element.name}">${element.name}<span class="syllables-of-name">&nbsp;${element.syllables}</span>
+async function buildElementHTML (element) {
+  return `<div class="element ${element.gender}" id="${element.name}" data-liked="false">
+            ${element.name}<span class="syllables-of-name">&nbsp;${element.syllables}</span>
             <img src="./assets/favorite_FILL0_wght400_GRAD0_opsz24_red.svg" alt="favorite symbol" class="save-name-button">
           </div>`;
 }
