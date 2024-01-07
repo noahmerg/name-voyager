@@ -34,7 +34,6 @@ const openButton = document.getElementById('save-button');
 async function fillBody () {
   try {
     let response = null;
-    console.log(requestGender);
     if (requestGender === 'both') {
       response = await fetch('http://localhost:8080/bookmarklist');
     } else {
@@ -48,7 +47,7 @@ async function fillBody () {
       }
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
   /**
      * creates a fav name element for the list and appends it to the list
@@ -183,7 +182,6 @@ async function updateIndexInDatabase (item, index) {
     if (!response.ok) {
       throw new Error('Couldnt update index of Element');
     }
-    console.log('hallo');
   } catch (error) {
     console.error('Error:', error);
   }
@@ -194,7 +192,6 @@ async function updateIndexInDatabase (item, index) {
    */
 function copyFunction (event) {
   const textElement = event.target.parentElement.parentElement.firstElementChild;
-  console.log(textElement);
   navigator.clipboard.writeText(textElement.innerText);
 }
 /**
@@ -202,11 +199,8 @@ function copyFunction (event) {
    * @param {Event} event
    */
 function removeFunction (event) {
-  const element = event.target.parentElement.parentElement;
   const name = event.target.parentElement.parentElement.querySelector('span').innerHTML;
-  element.remove();
-  deleteNameFromDB(name);
-  markName(name, false);
+  removeByName(name);
 }
 /**
    * selects dragged Item and adds dragging as class, allows dragging functionality
@@ -285,11 +279,9 @@ export function saveName () {
       const nameContainer = event.currentTarget.parentElement;
       const name = nameContainer.getAttribute('id');
       if (await isNameBookmarked(name)) {
-        await deleteNameFromDB(name);
-        markName(name, false);
+        removeByName(name);
       } else {
         await postName(name);
-        markName(name, true);
       }
       fillBody();
     });
@@ -297,20 +289,21 @@ export function saveName () {
 }
 
 function removeByName (name) {
+  deleteNameFromDB(name);
+  markName(name, false);
+
   const bookmarkList = document.getElementById('bookmark-list');
-
-  // Use Array.from to convert the NodeList to an array
   const spans = Array.from(bookmarkList.querySelectorAll('span'));
-
-  // Find the span with the matching text
   const matchingSpan = spans.find(span => span.innerText === name);
 
   if (matchingSpan) {
+    updateIndexInClientSide(matchingSpan.parentElement.getAttribute('data-index'));
     matchingSpan.parentElement.remove();
   }
 }
 
 async function postName (name) {
+  markName(name, true);
   try {
     await fetch('http://localhost:8080/bookmarklist', {
       method: 'POST',
@@ -332,8 +325,18 @@ async function deleteNameFromDB (name) {
         'Content-Type': 'application/json'
       }
     });
-    removeByName(name);
   } catch (error) {
     console.error(error.message);
   }
+}
+
+async function updateIndexInClientSide (index) {
+  const items = document.querySelectorAll('.favname');
+  items.forEach((item) => {
+    const curIndex = item.getAttribute('data-index');
+    if (curIndex > index) {
+      item.setAttribute('data-index', curIndex - 1);
+      updateIndexInDatabase(item, curIndex - 1);
+    }
+  });
 }
