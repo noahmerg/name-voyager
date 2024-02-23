@@ -1,5 +1,0 @@
-{
-  "watch": ["webapp/src/.", "server/."],
-  "ext": "js,jsx,ts,tsx,css,html,less,mjs",
-  "exec": "npm run emptydb && npm run initdb && npm run build && npm start"
-}

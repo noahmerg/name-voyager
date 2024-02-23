@@ -1,7 +1,5 @@
 import { initializeSlider } from './slider.mjs';
-// this script will be used to get the information the user inputed in the filter section
 
-// hardcoded
 export function resetListener () {
   const resetButton = document.getElementById('reset-button');
   resetButton.addEventListener('click', event => resetValues());

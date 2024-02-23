@@ -1,5 +1,4 @@
 import path from 'path';
-import reload from 'reload';
 import express from 'express';
 import { bookmarkCollection, namesCollection } from './db.mjs';
 
@@ -14,12 +13,7 @@ server.use(express.json({ extended: false }));
 // use static as middleware
 server.use(express.static(path.join(path.dirname(process.argv[1]), '../webapp/dist')));
 
-// listen on PORT
-reload(server).then(function (reloadReturned) {
-  server.listen(PORT, () => { console.log('HTTP server listening on port %d.', PORT); });
-}).catch(function (err) {
-  console.error('Reload could not start, could not start server', err);
-});
+server.listen(PORT, () => { console.log('HTTP server listening on port %d.', PORT); });
 
 // gets specific name with its data e.g. localhost:8080/name/noah
 server.get('/name/:name', async (request, response) => {
@@ -74,7 +68,6 @@ server.get('/names', async (request, response) => {
     const totalCount = await namesCollection.countDocuments(filter);
     const cursor = await namesCollection.find(filter).skip(skipNumOfNames).limit(limitNumOfNames);
     const names = await cursor.toArray();
-    // console.log(ergebnis);
     const ergebnis = {
       names,
       totalCount
@@ -128,7 +121,6 @@ server.post('/bookmarklist', async (request, response) => {
     } else {
       response.status(404).json({ message: 'Dokument nicht gefunden' });
     }
-    console.log(`${request.body.name} hinzugefügt`);
   } catch (error) {
     response.status(404).json({ message: 'Fehler, entweder Duplikate oder sonstiges' });
   }
@@ -147,7 +139,6 @@ server.delete('/bookmarklist/:name', async (request, response) => {
   try {
     await bookmarkCollection.deleteOne({ name: request.params.name });
     response.status(200).json({ message: 'Name erfolgreich gelöscht' });
-    console.log(`${request.params.name} gelöscht`);
   } catch (error) {
     response.status(500).json({ message: 'Konnte Name nicht löschen' });
   }

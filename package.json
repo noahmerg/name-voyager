@@ -4,11 +4,8 @@
     "esbuild": "^0.19.8",
     "eslint": "^8.54.0",
     "eslint-plugin-sonarjs": "^0.23.0",
-    "http-server": "^14.1.1",
     "less": "^4.2.0",
     "less-plugin-clean-css": "^1.5.1",
-    "nodemon": "^3.0.2",
-    "reload": "^3.2.1",
     "semistandard": "^17.0.0",
     "snazzy": "^9.0.0",
     "terser": "^5.24.0"
