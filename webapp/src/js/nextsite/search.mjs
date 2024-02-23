@@ -21,6 +21,7 @@ const resultsContainer = document.getElementsByClassName('results-container')[0]
 export function addSearchListener () {
   document.getElementById('search-button').addEventListener('click', event => {
     document.getElementById('pages-container').style.display = 'grid';
+    page = 0;
     getNames();
   });
 }
@@ -29,9 +30,10 @@ export async function getNames () {
   try {
     const response = await fetch(buildAPIURL());
     const result = await response.json();
-
     updateVariables(result);
-    updateDOMTree();
+    updateCursor();
+    updateCurrentPageLabel();
+    updateNames();
   } catch (error) {
     console.error(error.message);
   }
@@ -49,13 +51,15 @@ function buildAPIURL () {
 
   const syllablesVal = document.getElementById('syllables-slider').value;
 
-  return `${API_URL}/names?gender=${genderStr}&&${prefixStr}=${prefixVal}&&${suffixStr}=${suffixVal}&&syllables=${syllablesVal}`;
+  const min = page * document.getElementById('numOfNames-slider').value;
+  const max = (page + 1) * document.getElementById('numOfNames-slider').value;
+
+  return `${API_URL}/names?gender=${genderStr}&&${prefixStr}=${prefixVal}&&${suffixStr}=${suffixVal}&&syllables=${syllablesVal}&&min=${min}&&max=${max}`;
 }
 
 function updateVariables (result) {
-  page = 0;
-  names = result;
-  numOfNames = result.length;
+  names = result.names;
+  numOfNames = result.totalCount;
   numOfNamesPerPage = document.getElementById('numOfNames-slider').value;
   maxPage = Math.ceil(numOfNames / numOfNamesPerPage) - 1;
 }
@@ -69,40 +73,34 @@ export function addPageListener () {
   const currentPage = document.getElementById('input-current-page');
   currentPage.addEventListener('keydown', event => {
     if (event.key === 'Enter') {
-      page = parseInt(event.currentTarget.value) - 1;
-      updateDOMTree();
+      page = Math.min(Math.max(parseInt(event.currentTarget.value) - 1, 0), maxPage);
+      getNames();
     }
   });
   currentPage.addEventListener('blur', event => { // when currentPage goes from active to not-active
-    page = parseInt(event.currentTarget.value) - 1;
-    updateDOMTree();
+    page = Math.min(Math.max(parseInt(event.currentTarget.value) - 1, 0), maxPage);
+    getNames();
   });
 }
 
 function pageBack () {
   if (page >= 1) page = page - 1;
-  updateDOMTree();
+  getNames();
 }
 
 function pageDoubleBack () {
   if (page >= 1) page = 0;
-  updateDOMTree();
+  getNames();
 }
 
 function pageForward () {
   if (page <= maxPage - 1) page = page + 1;
-  updateDOMTree();
+  getNames();
 }
 
 function pageDoubleForward () {
   if (page <= maxPage - 1) page = maxPage;
-  updateDOMTree();
-}
-
-export function updateDOMTree () {
-  updateCursor();
-  updateCurrentPageLabel();
-  updateNames();
+  getNames();
 }
 
 function updateCursor () {
@@ -127,14 +125,14 @@ function updateCursor () {
 }
 
 function updateCurrentPageLabel () {
-  currentPageInput.value = page + 1; // update value and
-  currentPageInput.max = maxPage + 1; // update max
+  currentPageInput.value = numOfNames > 0 ? page + 1 : 0; // update value and
+  currentPageInput.max = maxPage + 1; // update max value of number input field
   document.getElementById('max-page').innerHTML = `of ${maxPage + 1}`;
 }
 
 async function updateNames () {
   removeAllNames();
-  for (let i = page * numOfNamesPerPage; i < Math.min((page + 1) * numOfNamesPerPage, names.length); i++) {
+  for (let i = 0; i < names.length; i++) {
     resultsContainer.insertAdjacentHTML('beforeend', await buildElementHTML(names[i]));
     markName(names[i].name, await isNameBookmarked(names[i].name));
   }
@@ -146,8 +144,8 @@ export async function isNameBookmarked (name) {
 }
 
 export function markName (name, newState) {
-  // Use querySelector to select the element with the specific ID
-  const nameElement = resultsContainer.querySelector(`#${name}`);
+  // Use querySelector to select the element with the specific ID (had to escape ')
+  const nameElement = resultsContainer.querySelector(`#${name.replace(/'/g, "\\'")}`);
 
   // Update the src attribute for the save-name-button's img within the selected element
   if (nameElement) {

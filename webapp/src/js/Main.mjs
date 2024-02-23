@@ -6,8 +6,6 @@ import { initializeSlider } from './nextsite/slider.mjs';
 import { addSearchListener, addPageListener } from './nextsite/search.mjs';
 import { resetListener } from './nextsite/reset.mjs';
 import { bookmarkPopup, bookmarkList, saveName } from './bookmark.mjs';
-import { starMover } from './stars.mjs';
-const images = document.querySelectorAll('.star-images');
 
 window.onload = function () {
   handleVisibilityChange();
@@ -22,12 +20,4 @@ window.onload = function () {
   bookmarkPopup();
   bookmarkList();
   saveName();
-
-  starMover();
-  images.forEach(function (img) {
-    img.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-    });
-    img.style.position = 'fixed';
-  });
 };

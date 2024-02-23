@@ -69,10 +69,16 @@ server.get('/names', async (request, response) => {
       const regex = new RegExp(regexString);
       filter.name = { $regex: regex };
     }
-    // console.log(filter);
-    const cursor = await namesCollection.find(filter);
-    const ergebnis = await cursor.toArray();
+    const skipNumOfNames = +request.query.min;
+    const limitNumOfNames = +request.query.max - skipNumOfNames;
+    const totalCount = await namesCollection.countDocuments(filter);
+    const cursor = await namesCollection.find(filter).skip(skipNumOfNames).limit(limitNumOfNames);
+    const names = await cursor.toArray();
     // console.log(ergebnis);
+    const ergebnis = {
+      names,
+      totalCount
+    };
     response.json(ergebnis);
   } catch (error) {
     console.error(error);
