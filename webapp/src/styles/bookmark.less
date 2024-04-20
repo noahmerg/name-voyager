@@ -1,24 +1,188 @@
 // main: "main.less"
 
-.save-button {
-  left: 90%;
+@backgroundcolor: #424550;
+@top_pos: 90%;
+@right_pos: 5%;
+
+.sticky(){
   position: fixed;
-  top: 90%;
-  z-index: 20;
-}
-@media all and (orientation:portrait) {
-  .save-button{
-    left:80%;
-  }
+  right: @right_pos;
 }
 
-.save-button button {
-  background-color: #424550;
+//save button
+#save-button {
+  .sticky();
+  top:90%;
+  right: @right_pos;
+  z-index: 20;
+  background-color: @backgroundcolor;
   border: 0px;
-  border-radius: 50%;
+  border-radius: 1.5rem;
   cursor: pointer;
   font-size: xx-large;
   height: 50px;
-  width: 50px;
+  width: min-content;
+  min-width: 50px;
+  max-width: 114px;
   user-select: none;
 }
+.save-button-symbol{
+  display: flex;
+  color:white;
+  justify-content: center;
+  align-items: center;
+  max-width: 50px;
+  max-height: 50px;
+  transition: 1s;
+}
+.save-button-content{
+  display:flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+@media all and (orientation:portrait) {
+  #save-button{
+    right:@right_pos+5%;
+  }
+}
+.save-button-text{
+  overflow:hidden;
+  min-width: 0px;
+  max-width: 0px;
+  font-size: 12px;
+  opacity: 0%;
+  transition: 1s; 
+  margin-right: 0px;
+}
+#save-button:hover .save-button-text{
+  max-width: 60px;
+  min-width: 60px;
+  margin-right: 10px;
+  margin-left: 5px;
+  opacity: 100%;
+}
+#save-button:hover .save-button-symbol{
+  margin-right: 5px;
+  margin-left: 10px;
+}
+
+// bookmark list
+#bookmark-list{
+  display: grid; /* Grid Container */
+  grid-template-rows: 10% 90%; /* 20% Höhe für den Header und 80% für den Body */ /* Setzen Sie die gewünschte Höhe für die Bookmark-Liste */
+  grid-template-areas:
+  "Header"
+  "Body";
+  .sticky();
+  bottom:11%;
+  background-color: @backgroundcolor;
+  border-radius: 25px;
+  min-width: 280px;
+  height: 500px;
+  transition: 0.7s;
+  transform-origin: bottom right;
+  border:2px solid rgb(41, 41, 41);
+  overflow: hidden;
+  z-index: 20;
+}
+.open{
+  transform: scale(1,1);
+  opacity: 100%;
+}
+.notOpen{
+  opacity: 0%;
+  transform: scale(0,0);
+}
+.bookmark-header{
+  grid-area: Header;
+  display: grid;
+  grid-template-columns: 12% 38% 50%;
+  grid-template-areas: "Logo Title Toggle";
+  background-color: rgb(58, 58, 58);
+  align-items: center;
+  justify-content: space-evenly;
+  padding:10px;
+  border-bottom: 2px solid rgb(41, 41, 41);
+}
+.bookmark-header img{
+  grid-area:Logo;
+  margin-left: 5px;
+}
+.bookmark-header span{
+  grid-area:Title;
+  font-weight: bold;
+}
+#bookmark-header-toggle-gender{
+  grid-area: Toggle;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 25px;
+  border: 1px solid black;
+  align-self: center;
+  justify-self: center;
+  overflow: hidden;
+  background-color: #353535;
+}
+#bookmark-header-toggle-gender input{
+  position: fixed;
+  width:0;
+  height:0;
+  opacity: 0;
+}
+#bookmark-header-toggle-gender label{
+  font-size: small;
+  padding:5px;
+  z-index:100;
+  transition: 1s;
+}
+#bookmark-header-toggle-gender input:checked+label{
+  background-color: #242424;
+}
+.bookmark-body{
+  grid-area: Body;
+  overflow-y: scroll;
+  padding: 10px;
+}
+.bookmark-body::-webkit-scrollbar{
+  width: 5px;
+  background-color: black;
+}
+.bookmark-body::-webkit-scrollbar-thumb{
+  background-color: #aaa;
+}
+.favname{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  user-select: none;
+  cursor: default;
+}
+.favname img{
+  user-select: none;
+}
+.favname img:hover{
+  filter:drop-shadow(0 0 3px rgb(152, 152, 152));
+}
+.drag-icon{
+  cursor: grab;
+}
+.icon-container{
+  display: flex;
+  align-items: center;
+  gap:5px;
+  flex-flow: row-reverse;
+}
+.favname::selection{
+  background: @backgroundcolor;
+  border: 1px dashed grey;
+}
+.dragging{
+  background-color: rgb(40, 40, 40);
+  cursor: grabbing;
+}
+
+

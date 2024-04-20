@@ -13,10 +13,8 @@
 @import "front-page/button-area.less";
 
 @import "nextsite/nextsite.less";
-@import "nextsite/filter/filter.less";
-@import "nextsite/filter/sex-slider.less";
-@import "nextsite/filter/syllables.less";
-@import "nextsite/results/results.less";
+@import "nextsite/filter.less";
+@import "nextsite/results.less";
 
 * {
   font-family: Arial, Helvetica, sans-serif;
@@ -36,6 +34,8 @@
 body {
   font-size: 16px;
   background-color: #colors[background];
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 html {
@@ -54,9 +54,4 @@ html {
   .frontpage{
     grid-template-areas: 'header header header' 'middleOne middleOne middleOne' 'footerl footerm footerr';
   }
-}
-
-#nextsite{
-  min-height: 100svh;
-  margin-top: 100px;
 }

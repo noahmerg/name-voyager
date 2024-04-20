@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -11,9 +10,33 @@
     <link rel="icon" type="svg" href="./assets/name-voyager-logo-white.svg" />
     <script defer src="bundle.js"></script>
 </head>
-
 <body>
-    <div class="save-button"><button>&#9825</button></div>
+    <div id="#save-button-container">
+        <button type="button" id="save-button">
+            <div class="save-button-content">
+                <span class="save-button-text">Bookmarks</span>
+                <div class="save-button-symbol">
+                    <img src="./assets/favorite_FILL0_wght400_GRAD0_opsz24.svg" alt="favorite symbol">
+                </div>
+            </div>
+        </button>
+        <div id="bookmark-list" class="notOpen">
+            <div class="bookmark-header">
+                <img src="./assets/favorite_FILL0_wght400_GRAD0_opsz24.svg" alt="favorite symbol">
+                <span>Bookmarks</span>
+                <div id="bookmark-header-toggle-gender">
+                    <input type="radio" id="b-women" name="gender-toggle" value="w">
+                        <label for="b-women">Women</label>
+                    <input type="radio" id="b-man"  name="gender-toggle" value="m">
+                        <label for="b-man">Man</label>
+                    <input type="radio" id="b-both" name="gender-toggle" value="both" checked>
+                        <label for="b-both">Both</label>
+                </div>
+            </div>
+            <div class="bookmark-body">    
+            </div>
+        </div>
+    </div>
     <article class="frontpage">
         <section class="logo-area">
             <img src="./assets/name-voyager-logo-white.svg" alt="logo" class="logo">
@@ -37,99 +60,71 @@
         </section>
     </article>
     <article id="nextsite">
-        <section class="filter-and-results">
             <div class="filter-container">
-                <div class="filter-element">
-                    <button class="accordion">Gender</button>
-                    <div class="panel">
-                        <label class="toggle">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                            <span class="labels" woman="W" man="M"></span>
-                        </label>
+                <fieldset class="filter-element">
+                    <legend>Gender</legend>
+                    <div class="radiobuttons">
+                        <input type="radio" name="gender" class="cool-radio" id="gender-w" value="w" />
+                            <label class="radio-label" for="gender-w">Women</label>
+                        <input type="radio" name="gender" class="cool-radio" id="gender-b" value="b" checked/>
+                            <label class="radio-label" for="gender-b">Both</label>
+                        <input type="radio" name="gender" class="cool-radio" id="gender-m" value="m"/>
+                            <label class="radio-label" for="gender-m">Man</label>
                     </div>
-                </div>
-                <div class="filter-element">
-                    <button class="accordion">Prefix</button>
-                    <div class="panel">
-                    </div>    
-                </div>
-                <div class="filter-element">
-                    <button class="accordion">Suffix</button>
-                    <div class="panel">
+                </fieldset>
+                <fieldset class="filter-element">
+                    <legend>Prefix</legend>
+                    <div class="radiobuttons">
+                        <input type="radio" name="prefix" class="cool-radio" id="prefix-include" value="includeprefix" checked />
+                            <label class="radio-label" for="prefix-include">Include</label>
+                        <input type="radio" name="prefix" class="cool-radio" id="prefix-exclude" value="excludeprefix"/>
+                            <label class="radio-label" for="prefix-exclude">Exclude</label>
                     </div>
-                </div>
-                <div class="filter-element">
-                    <button class="accordion">Syllables</button>
-                    <div class="panel">
-                        <label class="syllables-label" for="syllables">
-                            Syllables:
-                            <input type="number" class="syllables" name="syllables" min="1" max="10" placeholder="2">
-                        </label>
+                    <input type="text" class="cool-text" id="prefix-text" placeholder="Enter prefix">
+                </fieldset>
+                <fieldset class="filter-element">
+                    <legend>Suffix</legend>
+                    <div class="radiobuttons">
+                        <input type="radio" name="suffix" class="cool-radio" id="suffix-include" value="includesuffix" checked />
+                            <label class="radio-label" for="suffix-include">Include</label>
+                        <input type="radio" name="suffix" class="cool-radio" id="suffix-exclude" value="excludesuffix"/>
+                            <label class="radio-label" for="suffix-exclude">Exclude</label>
                     </div>
-                </div>
-                <div class="filter-element">
-                    <button class="apply">Apply</button>
+                    <input type="text" class="cool-text" id="suffix-text" placeholder="Enter suffix" >
+                </fieldset>
+                <fieldset class="filter-element">
+                    <legend id="syllables-legend">Syllables</legend>
+                    <input type="range" min="0" max="9" value="0" class="slider" id="syllables-slider">
+                </fieldset>
+                <fieldset class="filter-element">
+                    <legend id="numOfNames-legend">Number of Names per Page</legend>
+                    <input type="range" min="20" max="100" value="0" class="slider" step="20" id="numOfNames-slider">
+                </fieldset>
+                <div class="button-container-element">
+                    <span id="reset-button">Reset Filter</span>
+                    <span id="search-button">Search</span>
                 </div>
             </div>
             <div class="grid-bar"></div>
             <div class="results-container">
-                <div class="element w">Olivia</div>
-                <div class="element w">Emma</div>
-                <div class="element w">Amelia</div>
-                <div class="element m">Noah</div>
-                <div class="element m">Liam</div>
-                <div class="element w">Mia</div>
-                <div class="element m">Leo</div>
-                <div class="element w">Asher</div>
-                <div class="element m">Ethan</div>
-                <div class="element m">Sebastian</div>
-                <div class="element w">Aria</div>
-                <div class="element w">Aurora</div>
-                <div class="element w">Ellie</div>
-                <div class="element w">Mila</div>
-                <div class="element w">Sofia</div>
-                <div class="element m">Benjamin</div>
-                <div class="element m">Jackson</div>
-                <div class="element w">Ella</div>
-                <div class="element w">Violet</div>
-                <div class="element m">Serenity</div>
-                <div class="element m">Zion</div>
-                <div class="element w">Addison</div>
-                <div class="element m">Jeremiah</div>
-                <div class="element w">Alice</div>
-                <div class="element m">Lincoln</div>
-                <div class="element w">Alice</div>
-                <div class="element w">Bella</div>
-                <div class="element w">Sadie</div>
-                <div class="element m">Adrian</div>
-                <div class="element m">Anthony</div>
-                <div class="element m">Cooper</div>
-                <div class="element w">Amara</div>
-                <div class="element w">Autumn</div>
-                <div class="element m">Micah</div>
-                <div class="element w">Summer</div>
-                <div class="element m">Cameron</div>
-                <div class="element m">Emery</div>
-                <div class="element m">Ryan</div>
-                <div class="element w">Hannah</div>
-                <div class="element m">Rowan</div>
-                <div class="element m">Xavier</div>
-                <div class="element w">Brooklyn</div>
-                <div class="element w">Madelyn</div>
-                <div class="element m">Wesley</div>
-                <div class="element w">Leah</div>
-                <div class="element m">Weston</div>
-                <div class="element w">Maria</div>
-                <div class="element m">Andrew</div>
-                <div class="element m">Joshua</div>
-                <div class="element w">Savannah</div>
-                <div class="element m">Silas</div>
-                <div class="element m">Aubrey</div>
-                <div class="element w">Jade</div>
-                <div class="element w">Sophia</div>
+                <div class="pages-container" id="pages-container">
+                    <div id="page-doubleback" class="page-nav">
+                        <img src="./assets/navdoubleleft.svg" class="nav" alt="navigation left">
+                    </div>
+                    <div id="page-back" class="page-nav">
+                        <img src="./assets/navleft.svg" class="nav" alt="navigation left">
+                    </div>
+                    <div id="current-page" class="page-nav">
+                        <input id="input-current-page" type="number" min="1" max="40"><span id="max-page"></span>
+                    </div>
+                    <div id="page-forward" class="page-nav">
+                        <img src="./assets/navright.svg" class="nav" alt="navigation right">
+                    </div>
+                    <div id="page-doubleforward" class="page-nav">
+                        <img src="./assets/navdoubleright.svg" class="nav" alt="navigation left">
+                    </div>
+                </div>
             </div>
-        </section>
     </article>
 </body>
 

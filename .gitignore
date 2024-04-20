@@ -141,3 +141,6 @@ dist
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+#db config inlcuding password
+server/config.json

@@ -1,0 +1,110 @@
+// main: "../../main.less"
+
+#pages-container {
+  display: none;
+  grid-template-columns: 30px 30px auto 30px 30px;
+  grid-template-rows: 30px;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.page-nav {
+  border: solid 1px rgba(87, 95, 104, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#input-current-page {
+  background: transparent;
+  border: none;
+  border-bottom: solid 1px rgba(145, 211, 255, 0.349);
+  width: 3rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+#input-current-page:focus{
+  outline-width: 0;
+  border-bottom: solid 1px @accent-color;
+  transition: all .3s;
+}
+
+#input-current-page::-webkit-inner-spin-button,
+#input-current-page::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+#page-doubleback {
+  border-bottom-left-radius: 20%;
+  border-top-left-radius: 20%;
+}
+
+#page-doubleforward {
+  border-bottom-right-radius: 20%;
+  border-top-right-radius: 20%;
+}
+
+.nav {
+  filter: brightness(0) invert(1);
+  width: 150%;
+}
+
+.element {
+  background-color: transparent;
+  color: #colors[text];
+  padding: 18px;
+  box-sizing: border-box;
+  font-size: 1.5rem;
+  border-radius: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80px;
+}
+
+.syllables-of-name {
+  color: @text-secondary-color;
+}
+
+.save-name-button {
+  margin-left: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.save-name-button:hover {
+  transition: transform 0.2s ease; 
+  transform: scale(1.1); 
+}
+
+.save-name-button:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease; /* Make the animation shorter on click */
+}
+
+.w {
+  border: solid 2px @w-color;
+}
+
+.m {
+  border: solid 2px @m-color;
+}
+
+
+@media screen and (max-width: 1000px) {
+  .element {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1001px) {
+  .element {
+    width: calc(50% - 8px);
+  }
+}
